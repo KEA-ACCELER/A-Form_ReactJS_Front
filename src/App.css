@@ -6,3 +6,31 @@
 .createSurvey {
   justify-content: center;
 }
+
+  /* Style the checkmark/indicator */
+  #checkbox-blue *{
+    color: #0075f6;
+    }
+    .checkbox-blue input:checked ~ .checkmark:after {
+      color: #0075f6; }
+    
+  #checkbox-red * {
+    color: #dc3545; }
+    .checkbox-red input:checked ~ .checkmark:after {
+      color: #dc3545; }
+  
+  #checkbox-mint * {
+    color: #17a2b8; }
+    .checkbox-mint input:checked ~ .checkmark:after {
+      color: #17a2b8; }
+  
+  #checkbox-yellow * {
+    color: #ffc107; }
+    .checkbox-yellow input:checked ~ .checkmark:after {
+      color: #ffc107; }
+  
+  #checkbox-green * {
+    color: #28a745; }
+    .checkbox-green input:checked ~ .checkmark:after {
+      color: #28a745; }
+  
