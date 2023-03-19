@@ -1,14 +1,12 @@
-import React , {useState} from "react";
+import React from "react";
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
-import {useNavigate} from "react-router-dom";
 
 import RadioButton from './RadioButton'
 import ShortForm from './ShortForm'
 import Checkbox from './Checkbox'
 
 function QuestionForm(props) {
-  const navigate = useNavigate();
   const questionType = props.questiontype;
 
   return (
