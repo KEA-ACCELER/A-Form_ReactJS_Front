@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import QuestionForm from "./forms/QuestionForm";
 import AddingOption from "./forms/AddingOption";
 import Container from "react-bootstrap/Container";
@@ -9,7 +10,7 @@ function CreateSurvey() {
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)
     const [surveyTitle, setSurveyTitle] = useState("");
     const [surveyDesc, setSurveyDesc] = useState("");
-
+    const navigate = useNavigate();
     const nextId = useRef(0); // 데이터 아이디
 
     // TODO : X 표시를 누르면 해당 문제의 정보가 삭제된다.
@@ -88,6 +89,7 @@ function CreateSurvey() {
                         className="delete-btn"
                         type="submit"
                         variant="outline-danger"
+                        onClick={() => navigate("/", { replace: true })}
                     >
                         Delete Survey
                     </Button>
