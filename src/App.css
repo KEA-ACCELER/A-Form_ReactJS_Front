@@ -1,6 +1,10 @@
 .Home {
     text-align: center;
     padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 /* CreateSurvey */
 .CreateSurvey {
@@ -98,4 +102,21 @@
 }
 .deleteSelection-btn {
     margin-left: 8px;
+}
+
+/* FormList */
+.formList {
+    margin-top: 50px;
+    margin-bottom: 4px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 700px;
+}
+.formListElem {
+    padding-bottom: 8px;
+    width: 100%;
+    border-bottom: 1px solid rgba(151, 151, 151, 0.4);
 }
