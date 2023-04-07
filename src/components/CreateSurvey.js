@@ -52,17 +52,19 @@ function CreateSurvey() {
     return (
         <Container className="CreateSurvey">
             <div className="text-wrapper">
-                <input
-                    className="surveyTitle"
-                    type="text"
-                    value={surveyTitle}
-                    placeholder="Create Survey"
-                    onChange={(e) => {
-                        {
-                            setSurveyTitle(e.target.value);
-                        }
-                    }}
-                />
+                <div>
+                    <input
+                        className="surveyTitle"
+                        type="text"
+                        value={surveyTitle}
+                        placeholder="Create Survey"
+                        onChange={(e) => {
+                            {
+                                setSurveyTitle(e.target.value);
+                            }
+                        }}
+                    />
+                </div>
                 <input
                     className="surveyDesc"
                     type="text"
