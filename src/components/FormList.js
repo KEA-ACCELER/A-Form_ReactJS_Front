@@ -9,7 +9,7 @@ export const FormList = () => {
     return (
         <div className="formList">
             {formData.map((it) => (
-                <div id={it.id} className="formListElem">
+                <div key={it.id} className="formListElem">
                     Title : {it.formTitle}
                 </div>
             ))}

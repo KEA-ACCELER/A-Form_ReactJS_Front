@@ -16,6 +16,15 @@ function CreateSurvey() {
 
     const { onCreate } = useContext(FormHandlingContext); // Form 작성 완료 handler를 context에서 불러온다
 
+    const handleCreate = () => {
+        if (formTitle == "") {
+            alert("enter in a title");
+            return;
+        } else {
+            onCreate(formTitle, formDesc, questions);
+            navigate("/");
+        }
+    };
     // TODO : X 표시를 누르면 해당 문제의 정보가 삭제된다.
     function delQuestion(index) {
         questions.splice(index, 1);
@@ -87,7 +96,9 @@ function CreateSurvey() {
                         className="submit-btn"
                         type="submit"
                         variant="outline-success"
-                        onClick={() => onCreate(formTitle, formDesc, questions)}
+                        onClick={() => {
+                            handleCreate();
+                        }}
                     >
                         Create Survey
                     </Button>
