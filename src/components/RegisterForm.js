@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,7 +8,7 @@ export default function RegisterForm() {
   const [userId, setUserId] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [userGender, setUserGentder] = useState(false);
+  const [userGender, setUserGender] = useState(false);
   const [userPhone, setUserPhone] = useState('');
   const [userAddress, setUserAddress] = useState('');
 
@@ -21,7 +22,7 @@ export default function RegisterForm() {
     setUserPassword(e.target.value);
   }
   const genderChange = (e) => {
-    setUserGentder(e.target.value);
+    setUserGender(e.target.value);
   }
   const phoneChange = (e) => {
     setUserPhone(e.target.value);
@@ -34,10 +35,43 @@ export default function RegisterForm() {
   }, [])
 
   const confirm = (e) => {
+    console.log({
+      userId,
+      userEmail,
+      userPassword,
+      userGender,
+      userPhone,
+      userAddress
+    })
+    axios
+      .post("http://127.0.0.1:8080/app/user", {
+        userId,
+        userEmail,
+        userPassword,
+        userGender,
+        userPhone,
+        userAddress
+      })
+    .then((res) => {
+      alert("Register Success");
+      window.location.replace("/");
+    })
+    .catch((err) => {
+        if (err.response.status === 400) {
+          alert("Invalid User Inputs");
+        }
+        else if (err.response.status === 409){
+          alert(err.response.data);
+        }
+        else{
+          alert(err);
+        }
+      }
+    );
   }
 
   const login = (e) => {
-    window.location.replace("/login")
+    window.location.replace("/login");
   }
 
   return (
@@ -45,7 +79,6 @@ export default function RegisterForm() {
       <div className="Auth-form">
         <div className="Auth-form-content">
           <div className="sharpic">
-          {/* <img src="sharpic3.png" style={{ width: "319px", height: "125px"}} /> */}
           </div>
           <br></br>
           <div className="form-group mt-3">
@@ -70,15 +103,14 @@ export default function RegisterForm() {
               type="password"
               className="form-control mt-1"
               onChange={passwordChange}
-              // onKeyDown={enterKeyPress}
             />
           </div>
           <div className="form-group mt-3">
             <label>Gender</label>
             <Form.Select onChange={genderChange}>
               <option>Select</option>
-              <option value="0">MALE</option>
-              <option value="1">FEMALE</option>
+              <option value={true}>MALE</option>
+              <option value={false}>FEMALE</option>
             </Form.Select>
           </div>
           <div className="form-group mt-3">
