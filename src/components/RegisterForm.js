@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./Login.css";
+
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
@@ -68,7 +69,9 @@ export default function RegisterForm() {
       })
     .then((res) => {
       alert("Register Success");
+
       navigate("/");
+
     })
     .catch((err) => {
         if (err.response.status === 400) {
@@ -86,6 +89,7 @@ export default function RegisterForm() {
 
   const login = (e) => {
     navigate("/login");
+
   }
 
   return (

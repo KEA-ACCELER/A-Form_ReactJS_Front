@@ -5,7 +5,9 @@ import Home from "./components/Home";
 import CreateSurvey from "./components/CreateSurvey";
 import About from "./components/About";
 import RegisterForm from "./components/RegisterForm";
+
 import LoginForm from "./components/LoginForm";
+
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -37,6 +39,7 @@ function App() {
     }, [formData]);
 
     return (
+
         <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
             <FormStateContext.Provider value={formData}>
                 <FormHandlingContext.Provider value={{ onCreate }}>
@@ -54,6 +57,7 @@ function App() {
                 </FormHandlingContext.Provider>
             </FormStateContext.Provider>
         </AuthContext.Provider>
+
     );
 }
 

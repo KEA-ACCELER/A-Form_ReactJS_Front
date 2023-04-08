@@ -35,6 +35,7 @@ export default function Layout() {
                                 <FaGithub size={24} />
                             </Nav.Link>
                         </Nav>
+
                         {isLoggedIn ? (
                             <>
                             <Nav.Link onClick={() => navigate("/my-page")}>
@@ -57,6 +58,7 @@ export default function Layout() {
                                     로그인
                             </Nav.Link>
                             </>)}
+
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
