@@ -9,7 +9,6 @@ import { AuthContext } from "../App";
 export default function Layout() {
     const navigate = useNavigate();
     const { isLoggedIn } = useContext(AuthContext);
-    console.log(isLoggedIn)
     return (
         <div>
             <Navbar bg="light" expand="lg">
@@ -41,7 +40,12 @@ export default function Layout() {
                             <Nav.Link onClick={() => navigate("/my-page")}>
                                 마이페이지
                             </Nav.Link>
-                            <Nav.Link onClick={() => navigate("/logout")}>
+                            <Nav.Link onClick={() => {
+                                if (window.confirm("로그아웃하시겠습니까?")){
+                                    localStorage.removeItem("isLoggedIn");
+                                    window.location.reload();
+                                }
+                            }}>
                                 로그아웃
                             </Nav.Link>
                         </>)

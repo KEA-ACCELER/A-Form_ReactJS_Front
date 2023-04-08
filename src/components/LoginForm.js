@@ -36,6 +36,7 @@ export default function Login() {
       .then((res) => {
         alert("Success!");
         setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", true);
         navigate("/");
       })
       .catch((err) => {

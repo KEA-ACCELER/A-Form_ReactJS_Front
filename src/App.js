@@ -14,7 +14,7 @@ export const FormStateContext = React.createContext();
 export const AuthContext = React.createContext();
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
     const nextSurveyId = useRef(0); // 전체 forms 의 id를 관리하는 변수
     const [formData, setFormData] = useState([]); //Form 전체 데이터 관리 state
 
