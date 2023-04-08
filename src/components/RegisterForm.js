@@ -3,8 +3,11 @@ import React, { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
+
   const [userId, setUserId] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
@@ -65,7 +68,7 @@ export default function RegisterForm() {
       })
     .then((res) => {
       alert("Register Success");
-      window.location.replace("/");
+      navigate("/");
     })
     .catch((err) => {
         if (err.response.status === 400) {
@@ -82,7 +85,7 @@ export default function RegisterForm() {
   }
 
   const login = (e) => {
-    window.location.replace("/login");
+    navigate("/login");
   }
 
   return (
