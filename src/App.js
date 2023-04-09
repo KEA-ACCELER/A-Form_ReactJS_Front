@@ -12,43 +12,41 @@ export const FormHandlingContext = React.createContext();
 export const FormStateContext = React.createContext();
 
 function App() {
-    const nextSurveyId = useRef(0); // 전체 forms 의 id를 관리하는 변수
-    const [formData, setFormData] = useState([]); //Form 전체 데이터 관리 state
+  const nextSurveyId = useRef(0); // 전체 forms 의 id를 관리하는 변수
+  const [formData, setFormData] = useState([]); //Form 전체 데이터 관리 state
 
-    // Create
-    const onCreate = (formTitle, formDesc, questions) => {
-        const newForm = {
-            id: nextSurveyId.current,
-            formTitle: formTitle,
-            formDesc: formDesc,
-            questions: [...questions],
-        };
-        formData === []
-            ? setFormData([newForm])
-            : setFormData([...formData, newForm]);
-        nextSurveyId.current += 1;
+  // Create
+  const onCreate = (formTitle, formDesc, questions) => {
+    const newForm = {
+      id: nextSurveyId.current,
+      formTitle: formTitle,
+      formDesc: formDesc,
+      questions: [...questions],
     };
+    formData === [] ? setFormData([newForm]) : setFormData([...formData, newForm]);
+    nextSurveyId.current += 1;
+  };
 
-    useEffect(() => {
-        console.log(formData);
-    }, [formData]);
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
 
-    return (
-        <FormStateContext.Provider value={formData}>
-            <FormHandlingContext.Provider value={{ onCreate }}>
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/" element={<Layout />}>
-                            <Route index element={<Home />} />
-                            <Route path="about" element={<About />} />
-                            <Route path="create" element={<CreateSurvey />} />
-                            <Route path="register" element={<RegisterForm />} />
-                        </Route>
-                    </Routes>
-                </BrowserRouter>
-            </FormHandlingContext.Provider>
-        </FormStateContext.Provider>
-    );
+  return (
+    <FormStateContext.Provider value={formData}>
+      <FormHandlingContext.Provider value={{ onCreate }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="create" element={<CreateSurvey />} />
+              <Route path="register" element={<RegisterForm />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </FormHandlingContext.Provider>
+    </FormStateContext.Provider>
+  );
 }
 
 export default App;
