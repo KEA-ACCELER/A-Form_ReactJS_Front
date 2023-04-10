@@ -68,7 +68,7 @@ export default function RegisterForm() {
 
   const confirm = (e) => {
     axios
-      .post("http://127.0.0.1:8080/api/user", {
+      .post("/user", {
         userId,
         userEmail,
         userPassword,
