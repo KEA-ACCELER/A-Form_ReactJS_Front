@@ -26,7 +26,7 @@ export default function Login() {
   const loginClick = () => {
     axios
       .post(
-        "http://127.0.0.1:8080/app/user/login",
+        "http://127.0.0.1:8080/api/user/login",
         {
           userId,
           userPassword
