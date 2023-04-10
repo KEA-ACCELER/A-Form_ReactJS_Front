@@ -60,9 +60,9 @@ function QuestionForm(props) {
           </div>
         ) : (
           <div className="questionType">
-            {questionType === 1 && <SelectionAnswer type={'radio'} q={props.q} qIndex={props.qIndex} questions={props.questions} setQuestions={props.setQuestions} />}
-            {questionType === 2 && <SelectionAnswer type={'checkbox'} q={props.q} qIndex={props.qIndex} questions={props.questions} setQuestions={props.setQuestions} />}
-            {questionType === 3 && <ShortFormAnswer q={props.q} qIndex={props.qIndex} questions={props.questions} setQuestions={props.setQuestions} />}
+            {questionType === 1 && <SelectionAnswer type={'radio'} q={props.q} qIndex={props.qIndex} answer={props.answer} />}
+            {questionType === 2 && <SelectionAnswer type={'checkbox'} q={props.q} qIndex={props.qIndex} answer={props.answer} />}
+            {questionType === 3 && <ShortFormAnswer q={props.q} qIndex={props.qIndex} answer={props.answer} />}
           </div>
         )}
       </Card.Body>

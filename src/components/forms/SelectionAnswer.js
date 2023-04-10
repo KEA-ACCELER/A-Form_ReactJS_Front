@@ -8,12 +8,22 @@ function SelectionAnswer(props) {
 
   return (
     <Form.Group>
-      <div key={`question-${props.qIndex}`} className="mb-3">
+      <div className="mb-3">
         {props.q.item.map((item, index) => (
           <Form.Check
             type={props.type}
             id={`checkbox-${props.qIndex}-${index}`}
-            label={props.q.item[index]}
+            key={`checkbox-${props.qIndex}-${index}`}
+            name={`checkbox-${props.qIndex}`}
+            label={item}
+            onChange={(e) => {
+              if(props.type === "radio") {
+                for(let i = 0; i < props.answer.length; i++) {
+                  props.answer[i] = false;
+                }
+              }
+              props.answer[index] = e.target.checked;
+            }}
           />
         ))}
       </div>

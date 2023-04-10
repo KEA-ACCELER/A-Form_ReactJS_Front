@@ -8,7 +8,6 @@ import Button from "react-bootstrap/Button";
 import { FormHandlingContext } from "../App";
 import Axios from "axios";
 
-import axios from "axios";
 function CreateSurvey() {
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)
     const [formTitle, setFormTitle] = useState("");
@@ -191,6 +190,7 @@ function CreateSurvey() {
                 {questions.map((q, index) => {
                     return (
                         <QuestionForm
+                            forCreate={true}
                             questionType={q.questionType}
                             delQuestion={delQuestion}
                             q={q}
