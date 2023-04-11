@@ -48,18 +48,18 @@ jobs:
     - run: npm run build
     - run: npm test
 
-    - if: ${{ github.repository == 'KEA-ACCELER/about' && github.event_name != 'pull_request' }}
+    - if: ${{ github.repository == 'KEA-ACCELER/a-form' && github.event_name != 'pull_request' }}
       name: Setup Pages
       uses: actions/configure-pages@v3
 
-    - if: ${{ github.repository == 'KEA-ACCELER/about' && github.event_name != 'pull_request' }}
+    - if: ${{ github.repository == 'KEA-ACCELER/a-form' && github.event_name != 'pull_request' }}
       name: Upload pages artifact
       uses: actions/upload-pages-artifact@v1
       with:
         path: ./build
 
   deploy:
-    if: ${{ github.repository == 'KEA-ACCELER/about' && github.event_name != 'pull_request' }}
+    if: ${{ github.repository == 'KEA-ACCELER/a-form' && github.event_name != 'pull_request' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
