@@ -43,20 +43,19 @@
     outline: none;
     border-bottom: 1px solid blue;
 }
-.AvsBWrapper {
+.CreateAvsB .AvsBWrapper {
     display: flex;
     width: 100%;
     justify-content: space-around;
     margin-bottom: 24px;
-    margin-left: 0;
 }
-.ABImage {
+.CreateAvsB .ABImage {
     width: 360px;
     height: 270px;
     border: 1px dotted rgba(0, 0, 0, 0.2);
     background-color: rgba(0, 0, 0, 0.05);
 }
-.ABContent {
+.CreateAvsB .ABContent {
     display: flex;
     flex-direction: column;
 }
