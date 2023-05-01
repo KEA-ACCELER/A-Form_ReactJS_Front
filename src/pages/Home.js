@@ -17,16 +17,16 @@ export default function Home() {
                     <div className="homeBtnWrapper">
                         <Button
                             className="homeBtn"
-                            onClick={() => navigation("/create")}
+                            onClick={() => navigation("/community")}
                         >
-                            Create Form
+                            Do Survey
                         </Button>
                         <Button
                             className="homeBtn"
-                            onClick={() => navigation("/about")}
+                            onClick={() => navigation("/create")}
                             variant="outline-primary"
                         >
-                            About Form
+                            Create Form
                         </Button>
                     </div>
                 </div>

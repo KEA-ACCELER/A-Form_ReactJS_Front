@@ -12,6 +12,7 @@ import LoginForm from "./pages/LoginForm";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import { Community } from "./pages/Community";
 
 export const FormHandlingContext = React.createContext();
 export const FormStateContext = React.createContext();
@@ -86,6 +87,10 @@ function App() {
                                     <Route
                                         path="login"
                                         element={<LoginForm />}
+                                    />
+                                    <Route
+                                        path="community"
+                                        element={<Community />}
                                     />
                                 </Route>
                             </Routes>
