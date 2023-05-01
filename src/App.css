@@ -38,8 +38,29 @@ html {
     width: 35%;
 }
 /* Layout */
+
 .navMenuComponent {
     margin-right: 12px;
+}
+.navbarRight {
+    display: flex;
+    align-items: center;
+}
+.Layout .searchWrapper {
+    margin-right: 24px;
+    width: 500px;
+}
+.Layout .searchBar {
+    width: 100%;
+    margin-right: 100;
+}
+.navbarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-left: 16px;
+    margin-right: 4%;
 }
 /* CreateSurvey */
 
