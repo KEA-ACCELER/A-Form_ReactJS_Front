@@ -25,11 +25,11 @@ export const Community = () => {
                         <h5>Hot 설문</h5>
                         <a>더보기</a>
                     </div>
+                    <HotSurvey title="설문지 123" />
+                    <HotSurvey status="CLOSED" />
                     <HotSurvey />
                     <HotSurvey />
-                    <HotSurvey />
-                    <HotSurvey />
-                    <HotSurvey />
+                    <HotSurvey status="CLOSED" />
                 </div>
                 <div className="hotCategoryWrapper">
                     <div className="title2Wrapper">

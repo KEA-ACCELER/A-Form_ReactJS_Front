@@ -6,7 +6,7 @@ export const HotSurvey = (props) => {
         <div className="HotSurvey">
             <p className="surveyTitle">{props.title}</p>
             <p className="date">{props.date}</p>
-            <p className="status">{props.status}</p>
+            <p className={["status", props.status].join(" ")}>{props.status}</p>
         </div>
     );
 };
@@ -31,7 +31,7 @@ export const HotAvsBSurvey = (props) => {
 HotSurvey.defaultProps = {
     title: "제목",
     date: "2023. 04. 15",
-    status: "진행중",
+    status: "OPEN",
 };
 HotCategory.defaultProps = {
     category: "분야 예시 1",
