@@ -6,6 +6,7 @@ import CreateSurvey from "./pages/CreateSurvey";
 import Survey from "./pages/Survey";
 import About from "./pages/About";
 import RegisterForm from "./pages/RegisterForm";
+import { CreateAvsB } from "./pages/CreateAvsB";
 
 import LoginForm from "./pages/LoginForm";
 
@@ -91,6 +92,10 @@ function App() {
                                     <Route
                                         path="community"
                                         element={<Community />}
+                                    />
+                                    <Route
+                                        path="AvsB"
+                                        element={<CreateAvsB />}
                                     />
                                 </Route>
                             </Routes>

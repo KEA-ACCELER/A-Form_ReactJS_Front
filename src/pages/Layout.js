@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Container from "react-bootstrap/Container";
+
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ export default function Layout() {
             <Navbar fixed="top" bg="white">
                 <div className="navbarContainer ">
                     <Navbar.Brand onClick={() => navigate("/")}>
-                        <img src={logo} width={"130px"} />
+                        <img src={logo} width={"130px"} alt="" />
                     </Navbar.Brand>{" "}
                     <Form className="d-flex searchWrapper ">
                         <Form.Control

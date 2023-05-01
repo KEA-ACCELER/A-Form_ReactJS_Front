@@ -4,12 +4,9 @@ import { HotAvsBSurvey, HotCategory, HotSurvey } from "../components/HotSurvey";
 export const Community = () => {
     return (
         <div className="Community">
-            {/* <input type="text"></input>
-            <Button>create survey</Button>
-            <div>top bar</div> */}
             <div className="titleWrapper">
                 <h4 className="title">박빙설문 a대 b</h4>
-                <a>더보기</a>
+                <p>더보기</p>
             </div>
             <div className="AvsBWrapper">
                 <HotAvsBSurvey />
@@ -23,7 +20,7 @@ export const Community = () => {
                 <div className="hotSurveyWrapper">
                     <div className="title2Wrapper">
                         <h5>Hot 설문</h5>
-                        <a>더보기</a>
+                        <p>더보기</p>
                     </div>
                     <HotSurvey title="설문지 123" />
                     <HotSurvey status="CLOSED" />
@@ -34,7 +31,7 @@ export const Community = () => {
                 <div className="hotCategoryWrapper">
                     <div className="title2Wrapper">
                         <h5>Hot 분야</h5>
-                        <a>더보기</a>
+                        <p>더보기</p>
                     </div>
                     <HotCategory />
                     <HotCategory />

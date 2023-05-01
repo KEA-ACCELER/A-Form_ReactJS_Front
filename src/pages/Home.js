@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { Button } from "react-bootstrap";
+import React from "react";
+import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { FormList } from "../components/FormList";
@@ -21,16 +21,27 @@ export default function Home() {
                         >
                             Do Survey
                         </Button>
-                        <Button
+                        <DropdownButton
                             className="homeBtn"
-                            onClick={() => navigation("/create")}
                             variant="outline-primary"
+                            title={"Create Survey"}
                         >
-                            Create Form
-                        </Button>
+                            <Dropdown.Item
+                                eventKey="1"
+                                onClick={() => navigation("/create")}
+                            >
+                                Normal Survey
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                                eventKey="1"
+                                onClick={() => navigation("/AvsB")}
+                            >
+                                AvsB
+                            </Dropdown.Item>
+                        </DropdownButton>
                     </div>
                 </div>
-                <img src={Bg} className="homeImg" />
+                <img src={Bg} className="homeImg" alt="" />
             </div>
             <FormList />
         </div>

@@ -23,7 +23,7 @@ html {
     gap: 50px;
 }
 .homeBtn {
-    width: 150px;
+    width: 160px;
 }
 .homeTopWrapper {
     display: flex;
@@ -31,7 +31,7 @@ html {
     width: 100%;
 }
 .homeLeftWrapper {
-    margin-left: 10%;
+    margin-left: 8%;
     margin-top: 10%;
 }
 .homeImg {
