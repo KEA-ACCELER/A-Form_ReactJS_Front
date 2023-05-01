@@ -48,6 +48,7 @@
     width: 100%;
     justify-content: space-around;
     margin-bottom: 24px;
+    margin-left: 0;
 }
 .ABImage {
     width: 360px;
