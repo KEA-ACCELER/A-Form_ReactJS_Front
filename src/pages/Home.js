@@ -17,7 +17,6 @@ export default function Home() {
                     <div className="homeBtnWrapper">
                         <Button
                             className="homeBtn"
-<<<<<<< HEAD
                             onClick={() => navigation("/community")}
                         >
                             Do Survey
@@ -28,18 +27,6 @@ export default function Home() {
                             variant="outline-primary"
                         >
                             Create Form
-=======
-                            onClick={() => navigation("/create")}
-                        >
-                            Create Form
-                        </Button>
-                        <Button
-                            className="homeBtn"
-                            onClick={() => navigation("/about")}
-                            variant="outline-primary"
-                        >
-                            About Form
->>>>>>> 85ff90aeb435b03bf56be1f3fe376d6e732243e0
                         </Button>
                     </div>
                 </div>

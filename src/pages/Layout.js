@@ -7,13 +7,14 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../App";
 
 import logo from "../assets/images/A-Form-logo.png";
+import { Button, Form } from "react-bootstrap";
 
 export default function Layout() {
     const navigate = useNavigate();
     const { isLoggedIn } = useContext(AuthContext);
     return (
         <div>
-            <Navbar fixed="top" bg="light" expand="lg">
+            <Navbar fixed="top" bg="white" expand="lg">
                 <Container className="navbarContainer">
                     <Navbar.Brand onClick={() => navigate("/")}>
                         <img src={logo} width={"130px"} />
@@ -21,12 +22,23 @@ export default function Layout() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto"></Nav>
+                        {/* <Form className="d-flex">
+                                <Form.Control
+                                    type="search"
+                                    placeholder="Search"
+                                    className="me-2"
+                                    aria-label="Search"
+                                />
+                                <Button variant="outline-success">
+                                    Search
+                                </Button>
+                            </Form> */}
                         <Nav.Link
                             className="navMenuComponent"
                             onClick={() => navigate("/about")}
                         >
                             About
-                        </Nav.Link>
+                        </Nav.Link>{" "}
                         {isLoggedIn ? (
                             <>
                                 <Nav className="my-3">
@@ -72,6 +84,7 @@ export default function Layout() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+
             <Outlet />
         </div>
     );
