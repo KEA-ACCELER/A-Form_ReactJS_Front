@@ -19,6 +19,7 @@ html {
     font-size: 1.15em;
 }
 .homeBtnWrapper {
+    margin-top: 60px;
     display: flex;
     gap: 50px;
 }
@@ -49,10 +50,10 @@ html {
 .Layout .searchWrapper {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 45%;
     transform: translate(-50%, -50%);
     margin-right: 24px;
-    width: 500px;
+    width: 50vw;
 }
 .Layout .searchBar {
     width: 100%;
