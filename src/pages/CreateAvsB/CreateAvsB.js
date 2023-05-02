@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./CreateAvsB.css";
 import { Button } from "react-bootstrap";
 export const CreateAvsB = () => {
@@ -8,6 +8,38 @@ export const CreateAvsB = () => {
     const [B, setB] = useState("");
     const [ADesc, setADesc] = useState("");
     const [BDesc, setBDesc] = useState("");
+    const [imgFileA, setImgFileA] = useState();
+    const [imgFileB, setImgFileB] = useState();
+
+    const setPreviewImgA = (event) => {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            setImgFileA(event.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    const setPreviewImgB = (event) => {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            setImgFileB(event.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    const submitHandler = () => {
+        const newPost = {
+            title: formTitle,
+            description: formDesc,
+            A: A,
+            B: B,
+            ADesc: ADesc,
+            BDesc: BDesc,
+            imgFileA: imgFileA,
+            imgFileB: imgFileB,
+        };
+        console.log(newPost);
+    };
+    const imgRef = useRef();
     return (
         <div className="CreateAvsB">
             Create AvsB
@@ -30,44 +62,74 @@ export const CreateAvsB = () => {
                         setFormDesc(e.target.value);
                     }}
                 />
-                <div className="AvsBWrapper">
-                    <div className="ABContent">
-                        <div className="ABImage">image</div>
-                        <input
-                            value={A}
-                            placeholder="A"
-                            onChange={(e) => {
-                                setA(e.target.value);
-                            }}
-                        />
-                        <input
-                            value={ADesc}
-                            placeholder="Description"
-                            onChange={(e) => {
-                                setADesc(e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div className="ABContent">
-                        <div className="ABImage">image</div>
-                        <input
-                            value={B}
-                            placeholder="B"
-                            onChange={(e) => {
-                                setB(e.target.value);
-                            }}
-                        />
-                        <input
-                            value={BDesc}
-                            placeholder="Description"
-                            onChange={(e) => {
-                                setBDesc(e.target.value);
-                            }}
-                        />
-                    </div>
-                </div>
-                <Button variant="outline-primary">Submit</Button>
             </div>
+            <div className="AvsBWrapper">
+                <div className="ABContent">
+                    <input
+                        className="ABTitle"
+                        value={A}
+                        placeholder="A"
+                        onChange={(e) => {
+                            setA(e.target.value);
+                        }}
+                    />
+                    <input
+                        className="ABDesc"
+                        value={ADesc}
+                        placeholder="Description"
+                        onChange={(e) => {
+                            setADesc(e.target.value);
+                        }}
+                    />
+                    <img className="ABImage" src={imgFileA} alt="" />
+                    <form>
+                        <label className="ABImage-label" htmlFor="profileImg">
+                            이미지 추가
+                        </label>
+                        <input
+                            onChange={setPreviewImgA}
+                            className="ABImage-input"
+                            type="file"
+                            accept="image/*"
+                            id="profileImg"
+                        />
+                    </form>
+                </div>
+                <div className="ABContent">
+                    <input
+                        className="ABTitle"
+                        value={B}
+                        placeholder="B"
+                        onChange={(e) => {
+                            setB(e.target.value);
+                        }}
+                    />
+                    <input
+                        className="ABDesc"
+                        value={BDesc}
+                        placeholder="Description"
+                        onChange={(e) => {
+                            setBDesc(e.target.value);
+                        }}
+                    />
+
+                    <img className="ABImage" src={imgFileB} alt="" />
+
+                    <label className="ABImage-label" htmlFor="imgB">
+                        이미지 추가
+                    </label>
+                    <input
+                        onChange={setPreviewImgB}
+                        className="ABImage-input"
+                        type="file"
+                        accept="image/*"
+                        id="imgB"
+                    />
+                </div>
+            </div>
+            <Button variant="outline-primary" onClick={submitHandler}>
+                Submit
+            </Button>
         </div>
     );
 };
