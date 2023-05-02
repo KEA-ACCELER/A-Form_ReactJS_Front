@@ -1,10 +1,10 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
-import Logo2 from "../assets/images/logo2.png";
+import Logo2 from "../../assets/images/logo2.png";
 import "./About.css";
-import desk1 from "../assets/images/desk1.png";
-import x_icon from "../assets/images/x_icon.png";
-import check from "../assets/images/check1.png";
+import desk1 from "../../assets/images/desk1.png";
+import x_icon from "../../assets/images/x_icon.png";
+import check from "../../assets/images/check1.png";
 
 export default function About() {
     return (

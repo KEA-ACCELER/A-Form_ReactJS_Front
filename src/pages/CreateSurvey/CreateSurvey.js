@@ -1,11 +1,11 @@
 import React, { useState, useRef, useContext } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import QuestionForm from "../components/forms/QuestionForm";
-import AddingOption from "../components/forms/AddingOption";
+import QuestionForm from "../../components/forms/QuestionForm";
+import AddingOption from "../../components/forms/AddingOption";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { FormHandlingContext, IdContext } from "../App";
+import { FormHandlingContext, IdContext } from "../../App";
 
 function CreateSurvey() {
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)

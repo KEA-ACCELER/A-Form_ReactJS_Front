@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import "./Login.css";
+import "../LoginForm/Login.css";
 
 import { useNavigate } from "react-router-dom";
 
-import Icon from "../assets/images/girlIcon.png";
+import Icon from "../../assets/images/girlIcon.png";
 
 export default function RegisterForm() {
     const navigate = useNavigate();

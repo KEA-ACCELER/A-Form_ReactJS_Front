@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import Button from "react-bootstrap/Button";
-import { AuthContext } from "../App";
+import { AuthContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
