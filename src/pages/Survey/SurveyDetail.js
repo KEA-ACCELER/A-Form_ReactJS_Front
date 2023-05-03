@@ -6,7 +6,19 @@ import { useNavigate } from "react-router-dom";
 
 export const SurveyDetail = () => {
     const [open, setOpen] = useState(false);
+    const [comment, setComment] = useState("");
+    const [mockComment, setMockComment] = useState([
+        { author: "작성자", content: "wow! this survey is awesome" },
+        { author: "작성자", content: "wow! this survey is awesome" },
+        { author: "작성자", content: "wow! this survey is awesome" },
+        { author: "작성자", content: "wow! this survey is awesome" },
+    ]);
     const navigate = useNavigate();
+    const addComment = () => {
+        const newComment = { author: "작성자", content: comment };
+        setMockComment([...mockComment, newComment]);
+        setComment("");
+    };
     return (
         <div className="SurveyDetail">
             <div>
@@ -47,14 +59,19 @@ export const SurveyDetail = () => {
                 </Collapse>
             </div>
             <div className="commentBox">
-                <Comment />
-                <Comment />
-                <Comment />
-                <Comment />
+                {mockComment.map((it) => {
+                    return <Comment author={it.author} content={it.content} />;
+                })}
                 <div className="commentBarWrapper">
-                    {/* <div className="commentLabel">댓글 쓰기</div> */}
-                    <input type="text" className="commentBar" />
-                    <Button id="submitBtn">등록</Button>
+                    <input
+                        type="text"
+                        className="commentBar"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                    />
+                    <Button id="submitBtn" onClick={addComment}>
+                        등록
+                    </Button>
                 </div>
             </div>
         </div>

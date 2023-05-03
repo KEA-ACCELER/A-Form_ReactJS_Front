@@ -18,3 +18,11 @@
 }
 .Comment .content {
 }
+.commentMoreBtn {
+    background-color: transparent;
+    border: 0;
+}
+.commentPopover {
+    display: flex;
+    flex-direction: column;
+}
