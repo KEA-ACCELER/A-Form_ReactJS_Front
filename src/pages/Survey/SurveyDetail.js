@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./SurveyDetail.css";
 import { Button, Card, Collapse } from "react-bootstrap";
 import { Comment } from "../../components/Comment";
+import { useNavigate } from "react-router-dom";
 
 export const SurveyDetail = () => {
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
     return (
         <div className="SurveyDetail">
             <div>
@@ -14,7 +16,12 @@ export const SurveyDetail = () => {
                         <div className="desc">hello</div>
                     </div>
                     <div className="buttonWrapper">
-                        <Button variant="primary">Enter Survey</Button>
+                        <Button
+                            variant="primary"
+                            onClick={() => navigate("/survey/32")}
+                        >
+                            Enter Survey
+                        </Button>
                     </div>
                 </div>
                 <div className="statistics">

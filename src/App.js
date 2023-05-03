@@ -99,7 +99,7 @@ function App() {
                                         element={<CreateAvsB />}
                                     />
                                     <Route
-                                        path="details"
+                                        path="details/:id"
                                         element={<SurveyDetail />}
                                     />
                                 </Route>
