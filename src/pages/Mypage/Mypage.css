@@ -215,7 +215,12 @@
 
 .setting_container1 .profile_img {
   align-items: center;
-  margin-top: 20%;
+  margin-top: 30%;
+  width: 11rem;
+  height: 11rem;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-bottom: 2rem;
 }
 
 .change_photo_button {
@@ -234,18 +239,27 @@
   background-color: #005fa3;
 }
 
+.change_photo_button_input {
+  display: none;
+}
+
+/* setting의 오른쪽 */
+
 .setting_container2 {
   display: flex;
-  padding: 1rem 2rem;
-  background-color: #f5f5f5;
+  flex-direction: column;
+  width: 60%;
+  padding-top: 5%;
+  /* background-color: #f5f5f5; */
   flex: 7;
 }
 
-.setting_container1 .buttons {
+.setting_buttons {
   display: flex;
-  justify-content: center;
-  width: 30rem;
-  height: 2rem;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: flex-end;
 }
 
 .back_button,
@@ -261,5 +275,91 @@
 }
 
 .save_changes_button {
-  background-color: #00a65a;
+  background-color: #d7ddff;
+  margin-left: 5%;
+}
+
+.your_profile {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.your_profile_item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 30rem;
+  height: 5rem;
+}
+
+.your_profile_title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.your_profile_name {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(235, 72, 59, 0.08);
+}
+
+.your_profile_nickname {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(235, 72, 59, 0.08);
+}
+
+.your_profile_email {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(235, 72, 59, 0.08);
+}
+
+.your_profile_password {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(235, 72, 59, 0.08);
+}
+
+.alarm_setting {
+  display: flex;
+  align-items: center;
+  padding-left: 15%;
+}
+
+.alarm_icon {
+  margin-right: 1rem;
+}
+
+.alarm_icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.alarm_option {
+  font-size: 1.2rem;
+}
+
+.logout_button {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background-color: #d7ddff;
+  color: #fff;
+  width: 8rem;
+  margin-top: 10%;
+}
+
+.logout_button_container {
+  display: flex;
+  margin-left: 45%;
 }
