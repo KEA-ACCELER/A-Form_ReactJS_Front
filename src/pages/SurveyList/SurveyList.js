@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "./SurveyList.css";
+import { SurveyListItem } from "../../components/SurveyListItem";
 export const SurveyList = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState();
@@ -20,11 +21,8 @@ export const SurveyList = () => {
         <div className="SurveyList">
             {showList ? (
                 <>
-                    <h3>Form List</h3>
                     {formData.map((it) => (
-                        <div key={it._id} className="formListElem" onClick={() => navigate(`/survey/${it._id}`)}>
-                            Title : {it.title}
-                        </div>
+                        <SurveyListItem key={it._id} title={it.title} id={it._id} author={it.author} />
                     ))}
                 </>
             ) : (

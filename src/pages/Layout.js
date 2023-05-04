@@ -51,8 +51,9 @@ export default function Layout() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 </div>
             </Navbar>
-
+            {/* <div className="Outlet"> */}
             <Outlet />
+            {/* </div> */}
         </div>
     );
 }
