@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 
 function RadioButton(props) {
     function addSelection() {
-        props.questions[props.qIndex].selections.push("");
+        props.questions[props.qIndex].selections.push({ type: "LETTER", content: "" });
         props.setQuestions([...props.questions]);
     }
 
@@ -21,10 +21,10 @@ function RadioButton(props) {
                     <InputGroup>
                         <InputGroup.Checkbox disabled type={"radio"} name={`radio-${props.qIdex}`} id={`radio-${props.qIndex}-${index}`} />
                         <Form.Control
-                            value={props.q.selections[index]}
+                            value={props.q.selections[index].content}
                             placeholder="Enter selection"
                             onChange={(e) => {
-                                props.q.selections[index] = e.target.value;
+                                props.q.selections[index].content = e.target.value;
                                 props.setQuestions([...props.questions]);
                             }}
                         />

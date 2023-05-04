@@ -17,23 +17,24 @@ function CreateSurvey() {
     const nextCardId = useRef(0); // surveyCard 아이디
 
     const { onCreate } = useContext(FormHandlingContext); // Form 작성 완료 handler를 context에서 불러온다
-    const surveyId = useContext(IdContext);
     /* Variables for modal */
     const [linkModalShow, setLinkModalShow] = useState(false);
     const [confirmModalShow, setConfirmModalShow] = useState(false);
     const [deadline, setDeadline] = useState("");
+    const [surveyId, setSurveyId] = useState("");
     const handleClose = () => {
         setLinkModalShow(false);
-        navigate("/");
+        // navigate("/");
     };
     const handleConfirmModalClose = () => {
         setConfirmModalShow(false);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const type = "NORMAL";
         setConfirmModalShow(false);
-        onCreate(title, description, questions, deadline, type);
+        let newId = await onCreate(type, deadline, title, description, questions);
+        setSurveyId(newId);
         setLinkModalShow(true);
     };
 
@@ -45,6 +46,7 @@ function CreateSurvey() {
             setConfirmModalShow(true);
         }
     };
+
     // TODO : X 표시를 누르면 해당 문제의 정보가 삭제된다.
     function delQuestion(index) {
         questions.splice(index, 1);
@@ -55,15 +57,15 @@ function CreateSurvey() {
     function addQuestion(input) {
         if (questions == null) {
             questions.push({
-                questionType: input,
-                questionTitle: "",
+                type: input,
+                title: "",
                 selections: [],
                 id: nextCardId.current,
             });
         } else {
             questions.push({
-                questionType: input,
-                questionTitle: "",
+                type: input,
+                title: "",
                 selections: [],
                 id: nextCardId.current,
             });
@@ -118,9 +120,7 @@ function CreateSurvey() {
                 </div>
                 <Form className="Form">
                     {questions.map((q, index) => {
-                        return (
-                            <QuestionForm forCreate={true} questionType={q.questionType} delQuestion={delQuestion} q={q} qIndex={index} key={q.id} questions={questions} setQuestions={setQuestions} />
-                        );
+                        return <QuestionForm forCreate={true} type={q.type} delQuestion={delQuestion} q={q} qIndex={index} key={q.id} questions={questions} setQuestions={setQuestions} />;
                     })}
                 </Form>
                 {/* </FadeIn> */}

@@ -32,24 +32,29 @@ function App() {
     const onCreate = (type, deadline, title, description, questions) => {
         // send newSurvey to database
         const options = { headers: { "Content-Type": "application/json" } };
+        const q = questions;
+        q.map((it) => {
+            delete it["id"];
+        });
         const newSurvey = {
             type: type,
             title: title,
             description: description,
-            deadline: "",
-            questions: JSON.stringify([...questions]),
+            deadline: "2023-05-04T12:50:18.171Z",
+            questions: questions,
             author: 0, // 로그인 한 사람 아이디 동적으로 바뀌게 수정 필요
         };
-        console.log("Axios newsurey : ", newSurvey);
-        axios
-            .post("http://127.0.0.1:8080/api/survey/create", newSurvey, options)
+        const formId = axios
+            .post("http://localhost:3010/surveys", newSurvey, options)
             .then((response) => {
-                console.log(response.data.surveyPk);
-                setSurveyId(response.data.surveyPk);
+                console.log(response.data);
+                return response.data;
             })
             .catch((err) => {
                 console.log(err);
             });
+
+        return formId;
     };
 
     useEffect(() => {

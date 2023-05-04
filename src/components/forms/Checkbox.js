@@ -6,7 +6,7 @@ import "../../App.css";
 
 function Checkbox(props) {
     function addSelection() {
-        props.questions[props.qIndex].selections.push("");
+        props.questions[props.qIndex].selections.push({ type: "LETTER", content: "" });
         props.setQuestions([...props.questions]);
     }
 
@@ -22,10 +22,10 @@ function Checkbox(props) {
                     <InputGroup>
                         <InputGroup.Checkbox disabled type={"checkbox"} name={`checkbox-${props.qIdex}`} id={`checkbox-${props.qIndex}-${index}`} />
                         <Form.Control
-                            value={props.q.selections[index]}
+                            value={props.q.selections[index].content}
                             placeholder="Enter selection"
                             onChange={(e) => {
-                                props.q.selections[index] = e.target.value;
+                                props.q.selections[index].content = e.target.value;
                                 props.setQuestions([...props.questions]);
                             }}
                         />
