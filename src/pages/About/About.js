@@ -5,18 +5,19 @@ import "./About.css";
 import desk1 from "../../assets/images/desk1.png";
 import x_icon from "../../assets/images/x_icon.png";
 import check from "../../assets/images/check1.png";
+import FadeIn from "react-fade-in/lib/FadeIn";
 
 export default function About() {
     return (
-        <div className="About">
+        <FadeIn className="About">
             <div className="page1">
-                <img src={Logo2} alt="" />
+                <img src={Logo2} alt="" className="logo" width={100} />
                 <h4>
                     <span className="A">A</span>mazing Form <br />
                     <span className="A">A</span>utomatical Form <br /> By team{" "}
                     <span className="A">A</span>CCELER !
                 </h4>
-            </div>{" "}
+            </div>
             <div className="page2">
                 <div className="container1">
                     <h4>
@@ -79,6 +80,7 @@ export default function About() {
                     </div>
                 </div>
             </div>
+
             <div className="page3">
                 <div className="goal">
                     <span>
@@ -142,6 +144,7 @@ export default function About() {
                     </div>
                 </div>
             </div>
+
             <div className="developed-by">
                 Developed by: <a href="https://acceler.kr">Team ACCELER</a>
                 <FaGithub
@@ -149,6 +152,6 @@ export default function About() {
                     href="https://github.com/KEA-ACCELER/a-form"
                 />
             </div>
-        </div>
+        </FadeIn>
     );
 }

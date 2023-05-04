@@ -3,6 +3,7 @@ import "./SurveyDetail.css";
 import { Button, Card, Collapse } from "react-bootstrap";
 import { Comment } from "../../components/Comment";
 import { useNavigate } from "react-router-dom";
+import FadeIn from "react-fade-in/lib/FadeIn";
 
 export const SurveyDetail = () => {
     const [open, setOpen] = useState(false);
@@ -20,7 +21,7 @@ export const SurveyDetail = () => {
         setComment("");
     };
     return (
-        <div className="SurveyDetail">
+        <FadeIn className="SurveyDetail">
             <div>
                 <div className="topWrapper">
                     <div className="descWrapper">
@@ -74,6 +75,6 @@ export const SurveyDetail = () => {
                     </Button>
                 </div>
             </div>
-        </div>
+        </FadeIn>
     );
 };

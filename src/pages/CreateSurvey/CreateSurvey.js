@@ -11,6 +11,7 @@ import {
     ConfirmSurveyModal,
     LinkModal,
 } from "../../components/ConfirmSurveyModal";
+import FadeIn from "react-fade-in/lib/FadeIn";
 function CreateSurvey() {
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)
     const [formTitle, setFormTitle] = useState("");
@@ -74,7 +75,7 @@ function CreateSurvey() {
     }
 
     return (
-        <Container className="CreateSurvey">
+        <FadeIn className="CreateSurvey" childClassName="childClassName">
             <ConfirmSurveyModal
                 modalShow={confirmModalShow}
                 handleModalClose={handleConfirmModalClose}
@@ -145,7 +146,7 @@ function CreateSurvey() {
                     );
                 })}
             </Form>
-        </Container>
+        </FadeIn>
     );
 }
 

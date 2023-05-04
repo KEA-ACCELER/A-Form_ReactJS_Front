@@ -56,3 +56,6 @@ html {
 .Navbar {
     margin-bottom: 20px;
 }
+.childClassName {
+    width: 100%;
+}
