@@ -24,71 +24,91 @@ export const AuthContext = React.createContext();
 export const IdContext = React.createContext();
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
-  const [surveyId, setSurveyId] = useState(); // 전체 forms 의 id를 관리하는 변수
-  const [formData, setFormData] = useState([]); //Form 전체 데이터 관리 state
+    const [isLoggedIn, setIsLoggedIn] = useState(
+        localStorage.getItem("isLoggedIn")
+    );
+    const [surveyId, setSurveyId] = useState(); // 전체 forms 의 id를 관리하는 변수
+    const [formData, setFormData] = useState([]); //Form 전체 데이터 관리 state
 
-  // Create
-  const onCreate = (formTitle, formDesc, questions) => {
-    // send newSurvey to database
-    const options = { headers: { "Content-Type": "application/json" } };
-    const newSurvey = {
-      // surveyPk: nextS  furveyId.current,
-      surveyTitle: formTitle,
-      surveyDescription: formDesc,
-      questions: JSON.stringify([...questions]),
-      userId: "asdf", // 로그인 한 사람 아이디 동적으로 바뀌게 수정 필요
-    };
-    console.log("Axios newsurey : ", newSurvey);
-    axios
-      .post("http://127.0.0.1:8080/api/survey/create", newSurvey, options)
-      .then((response) => {
-        console.log(response.data.surveyPk);
-        setSurveyId(response.data.surveyPk);
-        const newForm = {
-          id: response.data.surveyPk,
-          formTitle: formTitle,
-          formDesc: formDesc,
-          questions: [...questions],
+    // Create
+    const onCreate = (type, deadline, title, description, questions) => {
+        // send newSurvey to database
+        const options = { headers: { "Content-Type": "application/json" } };
+        const newSurvey = {
+            type: type,
+            title: title,
+            description: description,
+            deadline: "",
+            questions: JSON.stringify([...questions]),
+            author: 0, // 로그인 한 사람 아이디 동적으로 바뀌게 수정 필요
         };
-        formData === [] ? setFormData([newForm]) : setFormData([...formData, newForm]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+        console.log("Axios newsurey : ", newSurvey);
+        axios
+            .post("http://127.0.0.1:8080/api/survey/create", newSurvey, options)
+            .then((response) => {
+                console.log(response.data.surveyPk);
+                setSurveyId(response.data.surveyPk);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+    useEffect(() => {
+        console.log(formData);
+    }, [formData]);
 
-  return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-      <FormStateContext.Provider value={formData}>
-        <IdContext.Provider value={surveyId}>
-          <FormHandlingContext.Provider value={{ onCreate }}>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Home />} />
-                  <Route path="about" element={<About />} />
-                  <Route path="mypage" element={<Mypage />} />
-                  <Route path="create" element={<CreateSurvey />} />
-                  <Route path="survey/:id" element={<Survey />} />
-                  <Route path="register" element={<RegisterForm />} />
-                  <Route path="login" element={<LoginForm />} />
-                  <Route path="community" element={<Community />} />
-                  <Route path="AvsB" element={<CreateAvsB />} />
-                  <Route path="mypage_setting" element={<Mypage_setting />} />
-                  <Route path="details/:id" element={<SurveyDetail />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </FormHandlingContext.Provider>
-        </IdContext.Provider>
-      </FormStateContext.Provider>
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+            <FormStateContext.Provider value={formData}>
+                <IdContext.Provider value={surveyId}>
+                    <FormHandlingContext.Provider value={{ onCreate }}>
+                        <BrowserRouter>
+                            <Routes>
+                                <Route path="/" element={<Layout />}>
+                                    <Route index element={<Home />} />
+                                    <Route path="about" element={<About />} />
+                                    <Route path="mypage" element={<Mypage />} />
+                                    <Route
+                                        path="create"
+                                        element={<CreateSurvey />}
+                                    />
+                                    <Route
+                                        path="survey/:id"
+                                        element={<Survey />}
+                                    />
+                                    <Route
+                                        path="register"
+                                        element={<RegisterForm />}
+                                    />
+                                    <Route
+                                        path="login"
+                                        element={<LoginForm />}
+                                    />
+                                    <Route
+                                        path="community"
+                                        element={<Community />}
+                                    />
+                                    <Route
+                                        path="AvsB"
+                                        element={<CreateAvsB />}
+                                    />
+                                    <Route
+                                        path="mypage_setting"
+                                        element={<Mypage_setting />}
+                                    />
+                                    <Route
+                                        path="details/:id"
+                                        element={<SurveyDetail />}
+                                    />
+                                </Route>
+                            </Routes>
+                        </BrowserRouter>
+                    </FormHandlingContext.Provider>
+                </IdContext.Provider>
+            </FormStateContext.Provider>
+        </AuthContext.Provider>
+    );
 }
 
 export default App;

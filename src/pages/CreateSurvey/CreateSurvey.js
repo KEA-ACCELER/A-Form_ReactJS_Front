@@ -14,8 +14,8 @@ import {
 import FadeIn from "react-fade-in/lib/FadeIn";
 function CreateSurvey() {
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)
-    const [formTitle, setFormTitle] = useState("");
-    const [formDesc, setFormDesc] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const navigate = useNavigate();
     const nextCardId = useRef(0); // surveyCard 아이디
 
@@ -24,7 +24,7 @@ function CreateSurvey() {
     /* Variables for modal */
     const [linkModalShow, setLinkModalShow] = useState(false);
     const [confirmModalShow, setConfirmModalShow] = useState(false);
-
+    const [deadline, setDeadline] = useState("");
     const handleClose = () => {
         setLinkModalShow(false);
         navigate("/");
@@ -34,13 +34,14 @@ function CreateSurvey() {
     };
 
     const handleSubmit = () => {
+        const type = "NORMAL";
         setConfirmModalShow(false);
-        onCreate(formTitle, formDesc, questions);
+        onCreate(title, description, questions, deadline, type);
         setLinkModalShow(true);
     };
 
     const handleCreate = () => {
-        if (formTitle === "") {
+        if (title === "") {
             alert("enter in a title");
             return;
         } else {
@@ -90,20 +91,20 @@ function CreateSurvey() {
                 <input
                     className="surveyTitle"
                     type="text"
-                    value={formTitle}
+                    value={title}
                     placeholder="Create Form"
                     onChange={(e) => {
-                        setFormTitle(e.target.value);
+                        setTitle(e.target.value);
                     }}
                 />
 
                 <input
                     className="surveyDesc"
                     type="text"
-                    value={formDesc}
+                    value={description}
                     placeholder="Form Description"
                     onChange={(e) => {
-                        setFormDesc(e.target.value);
+                        setDescription(e.target.value);
                     }}
                 />
             </div>
