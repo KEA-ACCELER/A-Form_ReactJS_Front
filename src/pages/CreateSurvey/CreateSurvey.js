@@ -57,14 +57,14 @@ function CreateSurvey() {
             questions.push({
                 questionType: input,
                 questionTitle: "",
-                item: [],
+                selections: [],
                 id: nextCardId.current,
             });
         } else {
             questions.push({
                 questionType: input,
                 questionTitle: "",
-                item: [],
+                selections: [],
                 id: nextCardId.current,
             });
         }
