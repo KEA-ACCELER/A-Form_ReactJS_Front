@@ -24,9 +24,7 @@ export const AuthContext = React.createContext();
 export const IdContext = React.createContext();
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(
-        localStorage.getItem("isLoggedIn")
-    );
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
     const [surveyId, setSurveyId] = useState(); // 전체 forms 의 id를 관리하는 변수
     const [formData, setFormData] = useState([]); //Form 전체 데이터 관리 state
 
@@ -69,38 +67,14 @@ function App() {
                                     <Route index element={<Home />} />
                                     <Route path="about" element={<About />} />
                                     <Route path="mypage" element={<Mypage />} />
-                                    <Route
-                                        path="create"
-                                        element={<CreateSurvey />}
-                                    />
-                                    <Route
-                                        path="survey/:id"
-                                        element={<Survey />}
-                                    />
-                                    <Route
-                                        path="register"
-                                        element={<RegisterForm />}
-                                    />
-                                    <Route
-                                        path="login"
-                                        element={<LoginForm />}
-                                    />
-                                    <Route
-                                        path="community"
-                                        element={<Community />}
-                                    />
-                                    <Route
-                                        path="AvsB"
-                                        element={<CreateAvsB />}
-                                    />
-                                    <Route
-                                        path="mypage_setting"
-                                        element={<Mypage_setting />}
-                                    />
-                                    <Route
-                                        path="details/:id"
-                                        element={<SurveyDetail />}
-                                    />
+                                    <Route path="create" element={<CreateSurvey />} />
+                                    <Route path="survey/:id" element={<Survey />} />
+                                    <Route path="register" element={<RegisterForm />} />
+                                    <Route path="login" element={<LoginForm />} />
+                                    <Route path="community" element={<Community />} />
+                                    <Route path="AvsB" element={<CreateAvsB />} />
+                                    <Route path="mypage_setting" element={<Mypage_setting />} />
+                                    <Route path="details/:id" element={<SurveyDetail />} />
                                 </Route>
                             </Routes>
                         </BrowserRouter>

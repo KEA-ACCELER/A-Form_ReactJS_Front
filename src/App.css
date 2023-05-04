@@ -17,6 +17,11 @@ html {
     display: flex;
     align-items: center;
 }
+/* .Layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} */
 .Layout .searchWrapper {
     position: absolute;
     top: 50%;
@@ -62,6 +67,16 @@ html {
 .Navbar {
     margin-bottom: 20px;
 }
+.FadeIn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 .childClassName {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

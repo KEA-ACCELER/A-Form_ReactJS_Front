@@ -7,10 +7,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { FormHandlingContext, IdContext } from "../../App";
 import "./CreateSurvey.css";
-import {
-    ConfirmSurveyModal,
-    LinkModal,
-} from "../../components/ConfirmSurveyModal";
+import { ConfirmSurveyModal, LinkModal } from "../../components/ConfirmSurveyModal";
 import FadeIn from "react-fade-in/lib/FadeIn";
 function CreateSurvey() {
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)
@@ -76,78 +73,59 @@ function CreateSurvey() {
     }
 
     return (
-        <FadeIn className="CreateSurvey" childClassName="childClassName">
-            <ConfirmSurveyModal
-                modalShow={confirmModalShow}
-                handleModalClose={handleConfirmModalClose}
-                onSubmit={handleSubmit}
-            />
-            <LinkModal
-                modalShow={linkModalShow}
-                handleModalClose={handleClose}
-                surveyId={surveyId}
-            />
-            <div className="text-wrapper">
-                <input
-                    className="surveyTitle"
-                    type="text"
-                    value={title}
-                    placeholder="Create Form"
-                    onChange={(e) => {
-                        setTitle(e.target.value);
-                    }}
-                />
-
-                <input
-                    className="surveyDesc"
-                    type="text"
-                    value={description}
-                    placeholder="Form Description"
-                    onChange={(e) => {
-                        setDescription(e.target.value);
-                    }}
-                />
-            </div>
-            <div className="ButtonWrapper">
-                <AddingOption addQuestion={addQuestion}></AddingOption>
-                <div className="SurveyBtnWrapper">
-                    <Button
-                        className="submit-btn"
-                        type="submit"
-                        variant="outline-success"
-                        onClick={() => {
-                            handleCreate();
+        <div className="CreateSurvey">
+            <FadeIn className="surveyWrapper" childClassName="childClassName">
+                <ConfirmSurveyModal modalShow={confirmModalShow} handleModalClose={handleConfirmModalClose} onSubmit={handleSubmit} />
+                <LinkModal modalShow={linkModalShow} handleModalClose={handleClose} surveyId={surveyId} />
+                <div className="text-wrapper">
+                    <input
+                        className="surveyTitle"
+                        type="text"
+                        value={title}
+                        placeholder="Create Form"
+                        onChange={(e) => {
+                            setTitle(e.target.value);
                         }}
-                    >
-                        Complete Form
-                    </Button>
-                    <Button
-                        className="delete-btn"
-                        type="submit"
-                        variant="outline-danger"
-                        onClick={() => navigate("/", { replace: true })}
-                    >
-                        Delete Form
-                    </Button>
+                    />
+
+                    <input
+                        className="surveyDesc"
+                        type="text"
+                        value={description}
+                        placeholder="Form Description"
+                        onChange={(e) => {
+                            setDescription(e.target.value);
+                        }}
+                    />
                 </div>
-            </div>
-            <Form className="Form">
-                {questions.map((q, index) => {
-                    return (
-                        <QuestionForm
-                            forCreate={true}
-                            questionType={q.questionType}
-                            delQuestion={delQuestion}
-                            q={q}
-                            qIndex={index}
-                            key={q.id}
-                            questions={questions}
-                            setQuestions={setQuestions}
-                        />
-                    );
-                })}
-            </Form>
-        </FadeIn>
+                <div className="ButtonWrapper">
+                    <AddingOption addQuestion={addQuestion}></AddingOption>
+                    <div className="SurveyBtnWrapper">
+                        <Button
+                            className="submit-btn"
+                            type="submit"
+                            variant="outline-success"
+                            onClick={() => {
+                                handleCreate();
+                            }}
+                        >
+                            Complete Form
+                        </Button>
+                        <Button className="delete-btn" type="submit" variant="outline-danger" onClick={() => navigate("/", { replace: true })}>
+                            Delete Form
+                        </Button>
+                    </div>
+                </div>
+                <Form className="Form">
+                    {questions.map((q, index) => {
+                        return (
+                            <QuestionForm forCreate={true} questionType={q.questionType} delQuestion={delQuestion} q={q} qIndex={index} key={q.id} questions={questions} setQuestions={setQuestions} />
+                        );
+                    })}
+                </Form>
+                {/* </FadeIn> */}
+            </FadeIn>
+        </div>
     );
 }
 

@@ -1,15 +1,23 @@
 /* CreateSurvey */
 
 .CreateSurvey {
+    /* text-align: center; */
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    justify-content: center;
+    width: 100%;
+}
+.surveyWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 80%;
     padding: 5%;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 50px;
     min-height: calc(100vh - 113.23px);
+    margin-right: 0;
 }
 .CreateSurvey .text-wrapper {
     display: flex;
@@ -65,7 +73,7 @@
 /* QuestionForm */
 .QuestionForm {
     margin-top: 2%;
-    width: 70%;
+    width: 85%;
 }
 .QuestionForm .top-wrapper {
     display: flex;

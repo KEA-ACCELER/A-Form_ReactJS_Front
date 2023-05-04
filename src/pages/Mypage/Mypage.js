@@ -47,7 +47,7 @@ export default function Mypage() {
     ];
 
     return (
-        <FadeIn className="Mypage" childClassName="childClassName">
+        <FadeIn className="Mypage">
             <div className="main">
                 <div className="profile">
                     <div className="profile_box">
