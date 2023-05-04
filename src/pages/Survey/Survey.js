@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import QuestionForm from "../../components/forms/QuestionForm";
 
 import Container from "react-bootstrap/Container";
@@ -8,79 +8,53 @@ import Button from "react-bootstrap/Button";
 
 import Axios from "axios";
 import FadeIn from "react-fade-in/lib/FadeIn";
+import axios from "axios";
 
 export default function Survey() {
-    const [data, setData] = useState({
-        surveyPk: 1,
-        surveyTitle: "Default Survey Title",
-        surveyDescription: "Default survey description",
+    const [surveyData, setSurveyData] = useState({
+        title: "Default Survey Title",
+        description: "Default survey description",
+        createdAt: "",
+        updatedAt: "",
+        deadline: "",
         questions: [],
-        author: 1,
+        statistics: [],
+        author: 0,
+        _id: "",
     });
     const [surveyAnswer, setSurveyAnswer] = useState();
+    const [loaded, setLoaded] = useState(false);
     const { id } = useParams();
 
+    //Get Survey Data
+    const getSurveyData = async () => {
+        let data = await axios.get(`http://localhost:3010/surveys/${id}`);
+        setSurveyData(data.data);
+        setAnswerForm();
+        console.log(data.data);
+        setLoaded(true);
+    };
     useEffect(() => {
-        Axios.get(`http://localhost:8080/api/survey/${id}`)
-            .then((response) => {
-                response.data = {
-                    ...response.data,
-                    questions: JSON.parse(response.data.questions),
-                };
-                setData(response.data);
+        getSurveyData();
+    }, []);
 
-                let answerForm = {
-                    surveyPk: response.data.surveyPk,
-                    userPk: response.data.author,
-                    answer: Array.from(
-                        { length: response.data.questions.length },
-                        (_, i) =>
-                            Array.from(
-                                {
-                                    length: response.data.questions[i].item
-                                        .length,
-                                },
-                                () => false
-                            )
-                    ),
-                };
-                console.log(answerForm);
-                setSurveyAnswer(answerForm);
-                console.log("response : ", response.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-        // 일단 axios로 값을 받았다고 가정하고 설정
-        // let response = {
-        // surveyPk: 1,
-        // surveyTitle: "test",
-        // surveyDescription: "test survey",
-        // questions:
-        //     '[{"id": 0,"questionTitle": "test question","questionType": 1, "item": ["test1", "test2", "test3"]},{"id": 1,"questionTitle": "test question2","questionType": 2,"item": ["test4", "test5", "test6"]},{"id": 3,"questionTitle": "test question3","questionType": 3,"item": ["test4"]}]',
-        // author: 1,
-        // };
-
-        // response = {
-        //     ...response,
-        //     questions: JSON.parse(response.questions),
-        // };
-        // setData(response);
-
-        // let answerForm = {
-        //     surveyPk: response.surveyPk,
-        //     userPK: 1,
-        //     answer: Array.from({ length: response.questions.length }, (_, i) =>
-        //         Array.from(
-        //             { length: response.questions[i].item.length },
-        //             () => false
-        //         )
-        //     ),
-        // };
-        // console.log(answerForm);
-        // setSurveyAnswer(answerForm);
-    }, [id]);
+    //Set AnswerForm
+    const setAnswerForm = () => {
+        let answerForm = {
+            surveyPk: id,
+            userPk: surveyData.author,
+            answer: Array.from({ length: surveyData.questions.length }, (_, i) =>
+                Array.from(
+                    {
+                        length: surveyData.questions[i].item.length,
+                    },
+                    () => false
+                )
+            ),
+        };
+        console.log(answerForm);
+        setSurveyAnswer(answerForm);
+    };
 
     function handleSubmit(e) {
         // 버튼누르면 응답 제출
@@ -102,39 +76,30 @@ export default function Survey() {
     }
 
     return (
-        <Container className="CreateSurvey">
-            <FadeIn>
-                <div className="text-wrapper">
-                    <div className="surveyTitle">{data.surveyTitle}</div>
-                    <div className="surveyDesc">{data.surveyDescription}</div>
-                </div>
-                <Form className="Form" onSubmit={handleSubmit}>
-                    <div className="ButtonWrapper">
-                        <div className="SurveyBtnWrapper">
-                            <Button
-                                className="submit-btn"
-                                type="submit"
-                                variant="outline-success"
-                            >
-                                Submit Answer
-                            </Button>
+        <>
+            {loaded ? (
+                <Container className="CreateSurvey">
+                    <FadeIn>
+                        <div className="text-wrapper">
+                            <div className="surveyTitle">{surveyData.title}</div>
+                            <div className="surveyDesc">{surveyData.description}</div>
                         </div>
-                    </div>
-                    {data.questions &&
-                        data.questions.map((q, index) => {
-                            return (
-                                <QuestionForm
-                                    forCreate={false}
-                                    questionType={q.questionType}
-                                    q={q}
-                                    qIndex={index}
-                                    key={q.id}
-                                    answer={surveyAnswer.answer[index]}
-                                />
-                            );
-                        })}
-                </Form>
-            </FadeIn>
-        </Container>
+                        <Form className="Form" onSubmit={handleSubmit}>
+                            <div className="ButtonWrapper">
+                                <div className="SurveyBtnWrapper">
+                                    <Button className="submit-btn" type="submit" variant="outline-success">
+                                        Submit Answer
+                                    </Button>
+                                </div>
+                            </div>
+                            {surveyData.questions &&
+                                surveyData.questions.map((q, index) => {
+                                    // return <QuestionForm forCreate={false} type={q.type} q={q} qIndex={index} key={q._id} answer={surveyAnswer.answer[index]} />;
+                                })}
+                        </Form>
+                    </FadeIn>
+                </Container>
+            ) : null}
+        </>
     );
 }

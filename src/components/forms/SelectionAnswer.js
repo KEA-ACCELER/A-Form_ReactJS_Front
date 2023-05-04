@@ -14,7 +14,7 @@ function SelectionAnswer(props) {
                         name={`checkbox-${props.qIndex}`}
                         label={item}
                         onChange={(e) => {
-                            if (props.type === "radio") {
+                            if (props.type === "RADIO") {
                                 for (let i = 0; i < props.answer.length; i++) {
                                     props.answer[i] = false;
                                 }

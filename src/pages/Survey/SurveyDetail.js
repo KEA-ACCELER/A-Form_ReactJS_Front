@@ -27,12 +27,12 @@ export const SurveyDetail = () => {
     const getSurveyData = async () => {
         let data = await axios.get(`http://localhost:3010/surveys/${id}`);
         setSurveyData(data.data);
-        console.log(surveyData);
         setLoaded(true);
     };
     useEffect(() => {
         getSurveyData();
     }, []);
+
     return (
         <>
             {loaded ? (
@@ -43,7 +43,7 @@ export const SurveyDetail = () => {
                             <div className="desc">{surveyData.description}</div>
                         </div>
                         <div className="buttonWrapper">
-                            <Button variant="primary" onClick={() => navigate("/survey/32")}>
+                            <Button variant="primary" onClick={() => navigate(`/survey/${id}`)}>
                                 Enter Survey
                             </Button>
                         </div>
