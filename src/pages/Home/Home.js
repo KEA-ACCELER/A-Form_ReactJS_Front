@@ -3,7 +3,7 @@ import { Button, Dropdown, DropdownButton, Fade } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import FadeIn from "react-fade-in";
-import { FormList } from "../../components/FormList";
+
 import Bg from "../../assets/images/3D_survey1.png";
 import "./Home.css";
 

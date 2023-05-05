@@ -9,6 +9,8 @@ import { FormHandlingContext, IdContext } from "../../App";
 import "../Survey/Survey.css";
 import { ConfirmSurveyModal, LinkModal } from "../../components/ConfirmSurveyModal";
 import FadeIn from "react-fade-in/lib/FadeIn";
+import { SurveyContext } from "../../services/servey/survey.context";
+
 function CreateSurvey() {
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)
     const [title, setTitle] = useState("");
@@ -16,7 +18,9 @@ function CreateSurvey() {
     const navigate = useNavigate();
     const nextCardId = useRef(0); // surveyCard 아이디
 
-    const { onCreate } = useContext(FormHandlingContext); // Form 작성 완료 handler를 context에서 불러온다
+    // Create
+    const { createSurvey } = useContext(SurveyContext); // Form 작성 완료 handler를 context에서 불러온다
+
     /* Variables for modal */
     const [linkModalShow, setLinkModalShow] = useState(false);
     const [confirmModalShow, setConfirmModalShow] = useState(false);
@@ -33,7 +37,7 @@ function CreateSurvey() {
     const handleSubmit = async () => {
         const type = "NORMAL";
         setConfirmModalShow(false);
-        let newId = await onCreate(type, deadline, title, description, questions);
+        let newId = await createSurvey(type, deadline, title, description, questions);
         setSurveyId(newId);
         setLinkModalShow(true);
     };
