@@ -17,7 +17,7 @@ export default function Survey() {
         createdAt: "",
         updatedAt: "",
         deadline: "",
-        questions: [],
+        questions: [""],
         statistics: [],
         author: 0,
         _id: "",
@@ -30,29 +30,28 @@ export default function Survey() {
     const getSurveyData = async () => {
         let data = await axios.get(`http://localhost:3010/surveys/${id}`);
         setSurveyData(data.data);
-        setAnswerForm();
+        setAnswerForm(data.data);
         console.log(data.data);
         setLoaded(true);
     };
     useEffect(() => {
         getSurveyData();
     }, []);
-
     //Set AnswerForm
-    const setAnswerForm = () => {
+    const setAnswerForm = (data) => {
         let answerForm = {
-            surveyPk: id,
-            userPk: surveyData.author,
-            answer: Array.from({ length: surveyData.questions.length }, (_, i) =>
+            surveyPk: data._id,
+            userPk: data.author,
+            answer: Array.from({ length: data.questions.length }, (_, i) =>
                 Array.from(
                     {
-                        length: surveyData.questions[i].item.length,
+                        length: data.questions[i].selections.length,
                     },
                     () => false
                 )
             ),
         };
-        console.log(answerForm);
+        console.log("answerform", answerForm);
         setSurveyAnswer(answerForm);
     };
 
@@ -78,27 +77,27 @@ export default function Survey() {
     return (
         <>
             {loaded ? (
-                <Container className="CreateSurvey">
-                    <FadeIn>
+                <div className="CreateSurvey">
+                    <FadeIn className="surveyWrapper" childClassName="childClassName">
                         <div className="text-wrapper">
                             <div className="surveyTitle">{surveyData.title}</div>
                             <div className="surveyDesc">{surveyData.description}</div>
                         </div>
                         <Form className="Form" onSubmit={handleSubmit}>
-                            <div className="ButtonWrapper">
-                                <div className="SurveyBtnWrapper">
-                                    <Button className="submit-btn" type="submit" variant="outline-success">
-                                        Submit Answer
-                                    </Button>
-                                </div>
-                            </div>
                             {surveyData.questions &&
                                 surveyData.questions.map((q, index) => {
-                                    // return <QuestionForm forCreate={false} type={q.type} q={q} qIndex={index} key={q._id} answer={surveyAnswer.answer[index]} />;
+                                    return <QuestionForm forCreate={false} type={q.type} q={q} qIndex={index} key={q._id} answer={surveyAnswer.answer[index]} />;
                                 })}
                         </Form>
+                        <div className="ButtonWrapper">
+                            <div className="SurveyBtnWrapper">
+                                <Button className="submit-btn" type="submit" variant="outline-success">
+                                    Submit Answer
+                                </Button>
+                            </div>
+                        </div>
                     </FadeIn>
-                </Container>
+                </div>
             ) : null}
         </>
     );

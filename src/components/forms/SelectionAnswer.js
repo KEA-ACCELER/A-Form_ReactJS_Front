@@ -12,7 +12,7 @@ function SelectionAnswer(props) {
                         id={`checkbox-${props.qIndex}-${index}`}
                         key={`checkbox-${props.qIndex}-${index}`}
                         name={`checkbox-${props.qIndex}`}
-                        label={item}
+                        label={item.content}
                         onChange={(e) => {
                             if (props.type === "RADIO") {
                                 for (let i = 0; i < props.answer.length; i++) {

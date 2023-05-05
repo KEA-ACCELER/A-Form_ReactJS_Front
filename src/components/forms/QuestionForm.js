@@ -10,6 +10,7 @@ import SelectionAnswer from "./SelectionAnswer";
 
 function QuestionForm(props) {
     const questionType = props.type;
+
     return (
         <Card className="QuestionForm" style={{ maxWidth: "1024px" }}>
             <Card.Body>
@@ -58,8 +59,8 @@ function QuestionForm(props) {
                     </div>
                 ) : (
                     <div className="questionType">
-                        {questionType === "RADIO" && <SelectionAnswer type={"radio"} q={props.q} qIndex={props.qIndex} answer={props.answer} />}
-                        {questionType === "CHECKBOX" && <SelectionAnswer type={"checkbox"} q={props.q} qIndex={props.qIndex} answer={props.answer} />}
+                        {questionType === "RADIO" && <SelectionAnswer type={"RADIO"} q={props.q} qIndex={props.qIndex} answer={props.answer} />}
+                        {questionType === "CHECKBOX" && <SelectionAnswer type={"CHECKBOX"} q={props.q} qIndex={props.qIndex} answer={props.answer} />}
                         {questionType === "SHORTFORM" && <ShortFormAnswer q={props.q} qIndex={props.qIndex} answer={props.answer} />}
                     </div>
                 )}
