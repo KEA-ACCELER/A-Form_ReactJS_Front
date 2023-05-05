@@ -19,11 +19,7 @@ export const Community = () => {
                         <h5>Hot 설문</h5>
                         <p>더보기</p>
                     </div>
-                    <SurveyListItem title="설문지 123" />
-                    <SurveyListItem status="CLOSED" />
-                    <SurveyListItem />
-                    <SurveyListItem />
-                    <SurveyListItem status="CLOSED" />
+                    <SurveyList page={1} offset={5} progressStatus="all" content="" sort="desc" />
                 </div>
                 <div className="hotCategoryWrapper hvr-float">
                     <div className="title2Wrapper">
@@ -51,7 +47,7 @@ export const Community = () => {
                 <p>더보기</p>
             </div>
             <div className="sucveyListWrapper hvr-float">
-                <SurveyList />
+                <SurveyList page={1} offset={10} progressStatus="all" content="" sort="desc" />
             </div>
         </FadeIn>
     );

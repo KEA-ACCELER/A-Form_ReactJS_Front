@@ -3,10 +3,10 @@ import { Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import QuestionForm from "../../components/forms/QuestionForm";
 import AddingOption from "../../components/forms/AddingOption";
-import Container from "react-bootstrap/Container";
+
 import Button from "react-bootstrap/Button";
 import { FormHandlingContext, IdContext } from "../../App";
-import "./CreateSurvey.css";
+import "../Survey/Survey.css";
 import { ConfirmSurveyModal, LinkModal } from "../../components/ConfirmSurveyModal";
 import FadeIn from "react-fade-in/lib/FadeIn";
 function CreateSurvey() {
@@ -75,7 +75,7 @@ function CreateSurvey() {
     }
 
     return (
-        <div className="CreateSurvey">
+        <div className="CreateSurvey Survey">
             <FadeIn className="surveyWrapper" childClassName="childClassName">
                 <ConfirmSurveyModal modalShow={confirmModalShow} handleModalClose={handleConfirmModalClose} onSubmit={handleSubmit} />
                 <LinkModal modalShow={linkModalShow} handleModalClose={handleClose} surveyId={surveyId} />
