@@ -11,7 +11,7 @@
     margin-right: 16px;
     width: 100%;
     text-align: center;
-    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+    /* text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue; */
 }
 .Community .title {
     margin: 0;
@@ -38,9 +38,8 @@
 .Community .AvsBWrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-right: 10%;
-    padding-left: 10%;
+    justify-content: space-around;
+
     padding-top: 2%;
     padding-bottom: 2%;
     margin-bottom: 28px;
