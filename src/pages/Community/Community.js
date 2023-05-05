@@ -7,19 +7,14 @@ export const Community = () => {
     return (
         <FadeIn className="Community" childClassName="childClassName">
             <div className="titleWrapper">
-                <h4 className="title">박빙설문 a대 b</h4>
-                <p>더보기</p>
+                <h2 className="pageTitle">Community</h2>
             </div>
-            <div className="AvsBWrapper">
-                <HotAvsBSurvey />
-                <HotAvsBSurvey />
-                <HotAvsBSurvey />
-            </div>
+
             <div className="titleWrapper">
                 <h4 className="title">많이 본 설문</h4>
             </div>
             <div className="bottomWrapper">
-                <div className="hotSurveyWrapper">
+                <div className="hotSurveyWrapper hvr-float">
                     <div className="title2Wrapper">
                         <h5>Hot 설문</h5>
                         <p>더보기</p>
@@ -30,7 +25,7 @@ export const Community = () => {
                     <SurveyListItem />
                     <SurveyListItem status="CLOSED" />
                 </div>
-                <div className="hotCategoryWrapper">
+                <div className="hotCategoryWrapper hvr-float">
                     <div className="title2Wrapper">
                         <h5>Hot 분야</h5>
                         <p>더보기</p>
@@ -43,10 +38,21 @@ export const Community = () => {
                 </div>
             </div>
             <div className="titleWrapper">
+                <h4 className="title">박빙설문 a대 b</h4>
+                <p>더보기</p>
+            </div>
+            <div className="AvsBWrapper hvr-float">
+                <HotAvsBSurvey />
+                <HotAvsBSurvey />
+                <HotAvsBSurvey />
+            </div>
+            <div className="titleWrapper all ">
                 <h4 className="title">전체 설문</h4>
                 <p>더보기</p>
             </div>
-            <SurveyList />
+            <div className="sucveyListWrapper hvr-float">
+                <SurveyList />
+            </div>
         </FadeIn>
     );
 };

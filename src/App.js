@@ -12,6 +12,7 @@ import { SurveyDetail } from "./pages/Survey/SurveyDetail";
 import LoginForm from "./pages/LoginForm/LoginForm";
 
 import "./App.css";
+import "./hover.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import axios from "axios";
