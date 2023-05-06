@@ -149,6 +149,10 @@ export default function About() {
         </div>
       </div>
       <div className="page4">
+        <div className="container0">
+          <div className="onlyaform">오직, A-Form 에서만</div>
+        </div>
+
         <div className="container1">
           <Carousel showStatus={false} showThumbs={false} infiniteLoop={true} onChange={handleCarouselChange} autoPlay={true} interval={2000}>
             {solutions.map((solution, index) => (

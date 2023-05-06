@@ -64,7 +64,12 @@
   font-size: 2rem;
 }
 
-.container1,
+.container1 {
+  flex-basis: 50%;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
 .container2 {
   flex-basis: 50%;
   padding: 2rem;
@@ -229,7 +234,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   margin: 1rem 0;
-  width: 50%; /* 카드의 너비를 변경 */
+  width: 40%; /* 카드의 너비를 변경 */
   max-width: 1000px; /* 원하는 최대 너비 설정 */
   position: relative;
   padding-bottom: 5%;
@@ -292,4 +297,16 @@
   width: 10rem;
   height: 10rem;
   object-fit: contain; /* 동영상 비율 유지 */
+}
+
+.onlyaform {
+  border-radius: 5px;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
