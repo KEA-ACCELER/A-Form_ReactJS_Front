@@ -79,8 +79,10 @@ export default function About() {
     setCurrentIndex(index);
   };
 
+  /*-------- scroll ---------*/
+
   return (
-    <FadeIn className="About">
+    <div className="About">
       <div className="page1">
         {/* <img src={Logo2} alt="" />
         <h4>
@@ -173,6 +175,6 @@ export default function About() {
         Developed by: <a href="https://acceler.kr">Team ACCELER</a>
         <FaGithub size={24} href="https://github.com/KEA-ACCELER/a-form" />
       </div>
-    </FadeIn>
+    </div>
   );
 }
