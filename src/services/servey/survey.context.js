@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 
 import { CreateSurvey } from "./survey.service";
-import { GetSurveyData, GetSurveyById } from "./survey.service";
+import { GetSurveyData, GetSurveyById, PostSurveyAnswer } from "./survey.service";
 
 export const SurveyContext = createContext();
 
@@ -12,6 +12,7 @@ export const SurveyContextProvider = ({ children }) => {
                 CreateSurvey,
                 GetSurveyData,
                 GetSurveyById,
+                PostSurveyAnswer,
             }}
         >
             {children}

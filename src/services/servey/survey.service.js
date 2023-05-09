@@ -38,3 +38,15 @@ export const GetSurveyById = async (id) => {
     console.log(result.data);
     return result;
 };
+export const PostSurveyAnswer = async (surveyAnswer, userToken) => {
+    const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
+    const result = await axios
+        .post("http://localhost:3010/answers", surveyAnswer, options)
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    return result;
+};
