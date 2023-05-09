@@ -1,18 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { AvsBSurveyListItem } from "../../components/AvsBSurveyListItem";
+import { AvsBSurveyListItem } from "./AvsBSurveyListItem";
 import "./AvsBSurveyList.css";
 
-export const AvsBSurveyList = () => {
+export const AvsBSurveyList = ({ page, offset, status, sort }) => {
   const [formData, setFormData] = useState([]);
   const [showList, setShowList] = useState(false);
+  const { GetSurveyData } = useContext(SurveyContext);
+
+  const getFormData = async () => {
+    console.log(page, offset, status, sort);
+
+    const result = await GetSurveyData(page, offset, status, sort);
+    console.log(result);
+    setFormData(result.data.data);
+    setShowList(true);
+  };
 
   useEffect(() => {
-    const getFormData = async () => {
-      const result = await axios.get("http://localhost:3010/avsbsurveys");
-      setFormData(result.data.data);
-      setShowList(true);
-    };
     getFormData();
   }, []);
 
@@ -21,18 +26,7 @@ export const AvsBSurveyList = () => {
       {showList ? (
         <>
           {formData.map((it) => (
-            <AvsBSurveyListItem
-              key={it._id}
-              title={it.title}
-              id={it._id}
-              author={it.author}
-              imgFileA={it.imgFileA}
-              imgFileB={it.imgFileB}
-              A={it.A}
-              B={it.B}
-              ADesc={it.ADesc}
-              BDesc={it.BDesc}
-            />
+            <AvsBSurveyListItem key={it._id} title={it.title} id={it._id} author={it.author} />
           ))}
         </>
       ) : (

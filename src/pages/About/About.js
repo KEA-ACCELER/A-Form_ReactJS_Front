@@ -12,8 +12,8 @@ import survey2 from "../../assets/images/3D_survey3.png";
 import right_arrow from "../../assets/images/right_arrow.png";
 import left_arrow from "../../assets/images/left_arrow.png";
 import aform_media from "../../assets/images/media/A-form.mp4";
-import useScrollFadeIn from "../Effect/useScrollFadeIn";
-import useScrollClipPath from "../Effect/useScrollClipPath";
+import useScrollFadeIn from "../../animation/useScrollFadeIn";
+import useScrollClipPath from "../../animation/useScrollClipPath";
 
 export default function About() {
   const [currentIndex, setCurrentIndex] = useState(0);

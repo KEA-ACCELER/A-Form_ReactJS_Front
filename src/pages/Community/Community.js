@@ -35,7 +35,7 @@ export const Community = () => {
         </div>
       </div>
       <div className="titleWrapper">
-        <h4 className="title">박빙설문 a대 b</h4>
+        <h4 className="title">박빙설문 A vs B</h4>
         <p>더보기</p>
       </div>
       <div className="AvsBWrapper hvr-float">
