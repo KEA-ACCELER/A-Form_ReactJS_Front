@@ -64,7 +64,7 @@ function CreateSurvey() {
     const nextCardId = useRef(0); // surveyCard 아이디
 
     // Create
-    const { CreateSurvey } = useContext(SurveyContext); // Form 작성 완료 handler를 context에서 불러온다
+    const { CreateSurvey, AIGenerateSurvey } = useContext(SurveyContext); // Form 작성 완료 handler를 context에서 불러온다
     // User Token, isLogin
     const { userToken, isLogin } = useContext(AuthenticationContext);
 
@@ -113,6 +113,8 @@ function CreateSurvey() {
     const AIGenerateHandler = () => {
         setIsLoading(true);
         setTimeout(() => {
+            const msg = "축구와 관련된 내용을 json으로 만들어줘";
+            console.log(AIGenerateSurvey(msg, userToken));
             setTitle(mockData.title);
             setQuestions(mockData.questions);
             setIsLoading(false);
