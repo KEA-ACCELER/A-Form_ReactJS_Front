@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form } from "react-bootstrap";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import QuestionForm from "../../components/forms/QuestionForm";
+import { SurveyContext } from "../../services/servey/survey.context";
 
 import Button from "react-bootstrap/Button";
 
 import Axios from "axios";
 import FadeIn from "react-fade-in/lib/FadeIn";
-import axios from "axios";
 
 export default function Survey() {
+    const { GetSurveyById } = useContext(SurveyContext);
     const [surveyData, setSurveyData] = useState({
         title: "Default Survey Title",
         description: "Default survey description",
@@ -27,7 +28,7 @@ export default function Survey() {
 
     //Get Survey Data
     const getSurveyData = async () => {
-        let data = await axios.get(`http://localhost:3010/surveys/${id}`);
+        let data = await GetSurveyById(id);
         setSurveyData(data.data);
         setAnswerForm(data.data);
         console.log(data.data);
