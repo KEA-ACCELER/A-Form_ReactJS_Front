@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { loginHandler } from "./authentication.service";
 import { registerHandler, GetUserData } from "./authentication.service";
 
@@ -7,7 +7,7 @@ export const AuthenticationContext = createContext();
 export const AuthenticationContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [userToken, setUserToken] = useState(null);
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(localStorage.getItem("isLoggedIn"));
     const [regComplete, setRegComplete] = useState(false);
 
     const onLogin = async (userId, userPassword) => {
@@ -21,6 +21,7 @@ export const AuthenticationContextProvider = ({ children }) => {
             return;
         } else {
             setUserToken(loginRes.data);
+            localStorage.setItem("isLoggedIn", true);
             setIsLogin(true);
             alert("로그인 되었습니다!");
         }
@@ -30,6 +31,8 @@ export const AuthenticationContextProvider = ({ children }) => {
         setUserToken("");
         setIsLogin(false);
         alert("로그아웃 되었습니다!");
+        localStorage.removeItem("isLoggedIn");
+
         window.location.reload();
     };
 

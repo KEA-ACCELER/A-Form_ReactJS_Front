@@ -20,7 +20,7 @@ export const ConfirmSurveyModal = ({ modalShow, handleModalClose, onSubmit }) =>
     return (
         <Modal show={modalShow} onHide={handleModalClose} className="sendFormModal">
             <Modal.Header closeButton>
-                <Modal.Title>Post this Survey?</Modal.Title>
+                <Modal.Title>Publish this Survey?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div>Select Category</div>

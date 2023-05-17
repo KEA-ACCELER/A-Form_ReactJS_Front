@@ -123,8 +123,9 @@ function CreateSurvey() {
         }
     };
     useEffect(() => {
-        // CheckLogin();
-    }, []);
+        console.log(isLogin);
+        CheckLogin();
+    }, [isLogin]);
 
     /* Modal */
     // Modal state
