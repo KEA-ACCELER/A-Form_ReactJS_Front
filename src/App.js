@@ -19,6 +19,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { SurveyContextProvider } from "./services/survey/survey.context";
 import { AuthenticationContextProvider } from "./services/authentication/authentication.context";
+import { ToastContainer, toast } from "react-toastify";
 
 export const FormHandlingContext = React.createContext();
 
@@ -28,6 +29,7 @@ function App() {
     return (
         <AuthenticationContextProvider>
             <SurveyContextProvider>
+                <ToastContainer className="Toast" closeButton={false} position={toast.POSITION.TOP_CENTER} icon={false} pauseOnFocusLoss={false} autoClose={1000} />
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<Layout />}>
