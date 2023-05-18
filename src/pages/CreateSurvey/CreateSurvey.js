@@ -8,6 +8,8 @@ import "../Survey/Survey.css";
 import { ConfirmSurveyModal, LinkModal } from "../../components/Modal/ConfirmSurveyModal";
 import { SurveyContext } from "../../services/survey/survey.context";
 import { AuthenticationContext } from "../../services/authentication/authentication.context";
+import { PostContext } from "../../services/post/post.context";
+
 import { SiProbot } from "react-icons/si";
 import FadeIn from "../../animation/FadeIn";
 
@@ -58,10 +60,11 @@ const mockData = {
 function CreateSurvey() {
     // Navigation
     const navigate = useNavigate();
-    // Survey Context
-    const { CreateSurvey, AIGenerateSurvey } = useContext(SurveyContext); // Form 작성 완료 handler를 context에서 불러온다
-    // User Token, isLogin
-    const { userToken, isLogin } = useContext(AuthenticationContext);
+    // Context
+    const { CreateSurvey, AIGenerateSurvey } = useContext(SurveyContext); // Survey
+    const { CreatePost } = useContext(PostContext); // Post
+    const { userToken, isLogin } = useContext(AuthenticationContext); // User Token, isLogin
+
     const CheckLogin = () => {
         if (isLogin == false) {
             alert("로그인이 필요한 서비스 입니다.");
@@ -76,6 +79,8 @@ function CreateSurvey() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)
+    const [surveyId, setSurveyId] = useState("");
+    const [postId, setPostId] = useState("");
     const nextCardId = useRef(0); // surveyCard 아이디
 
     const toastPromise = (promise) => {
@@ -154,9 +159,12 @@ function CreateSurvey() {
         setConfirmModalShow(false);
         let newId = await CreateSurvey(type, title, description, questions, userToken);
         setSurveyId(newId);
-        // setLinkModalShow(true);
     };
-
+    // Create Post
+    const createPostHandler = async () => {
+        let id = await CreatePost(title, description, surveyId, userToken);
+        setPostId(id);
+    };
     // ai state //
     const [aiIsLoading, setAiIsLoading] = useState(false);
     const AIGenerateHandler = () => {
@@ -175,7 +183,7 @@ function CreateSurvey() {
     // Modal state
     const [linkModalShow, setLinkModalShow] = useState(false);
     const [confirmModalShow, setConfirmModalShow] = useState(false);
-    const [surveyId, setSurveyId] = useState("");
+
     // Modal Function
     const handleClose = () => {
         setLinkModalShow(false);
@@ -229,8 +237,8 @@ function CreateSurvey() {
     return (
         <div className="CreateSurvey Survey">
             <FadeIn className="surveyWrapper" childClassName="childClassName">
-                <ConfirmSurveyModal modalShow={confirmModalShow} handleModalClose={handleConfirmModalClose} onSubmit={handleSubmit} />
-                <LinkModal modalShow={linkModalShow} handleModalClose={handleClose} surveyId={surveyId} />
+                <ConfirmSurveyModal modalShow={confirmModalShow} handleModalClose={handleConfirmModalClose} onSubmit={createPostHandler} />
+                <LinkModal modalShow={linkModalShow} handleModalClose={handleClose} postId={postId} />
 
                 <div className="text-wrapper">
                     <input
