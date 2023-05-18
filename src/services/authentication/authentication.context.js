@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { loginHandler } from "./authentication.service";
 import { registerHandler, GetUserData } from "./authentication.service";
 
@@ -6,8 +6,8 @@ export const AuthenticationContext = createContext();
 
 export const AuthenticationContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [userToken, setUserToken] = useState(null);
-    const [isLogin, setIsLogin] = useState(false);
+    const [userToken, setUserToken] = useState(localStorage.getItem("userToken"));
+    const [isLogin, setIsLogin] = useState(localStorage.getItem("isLoggedIn"));
     const [regComplete, setRegComplete] = useState(false);
 
     const onLogin = async (userId, userPassword) => {
@@ -20,7 +20,9 @@ export const AuthenticationContextProvider = ({ children }) => {
             alert("비밀번호가 일치하지 않습니다.");
             return;
         } else {
+            localStorage.setItem("userToken", loginRes.data);
             setUserToken(loginRes.data);
+            localStorage.setItem("isLoggedIn", true);
             setIsLogin(true);
             alert("로그인 되었습니다!");
         }
@@ -30,6 +32,9 @@ export const AuthenticationContextProvider = ({ children }) => {
         setUserToken("");
         setIsLogin(false);
         alert("로그아웃 되었습니다!");
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userToken");
+
         window.location.reload();
     };
 
