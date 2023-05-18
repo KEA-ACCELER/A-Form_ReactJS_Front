@@ -64,7 +64,7 @@ function CreateSurvey() {
     // Context
     const { CreateSurvey, AIGenerateSurvey } = useContext(SurveyContext); // Survey
     const { CreatePost } = useContext(PostContext); // Post
-    const { userToken, isLogin } = useContext(AuthenticationContext); // User Token, isLogin
+    const { userToken, isLogin, userData } = useContext(AuthenticationContext); // User Token, isLogin
 
     const CheckLogin = () => {
         if (isLogin == false) {
@@ -163,7 +163,7 @@ function CreateSurvey() {
     };
     // Create Post
     const createPostHandler = async () => {
-        let id = await CreatePost(title, description, surveyId, userToken);
+        let id = await CreatePost(title, description, surveyId, userData.userPk);
         setPostId(id);
     };
     // ai state //

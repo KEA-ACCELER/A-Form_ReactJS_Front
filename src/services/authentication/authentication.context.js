@@ -11,6 +11,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     const [regComplete, setRegComplete] = useState(false);
     const [userData, setUserData] = useState("");
 
+    //Get user Data.
     useEffect(() => {
         if (userToken != "") {
             setUserData(GetUserData(userToken));
@@ -61,7 +62,7 @@ export const AuthenticationContextProvider = ({ children }) => {
                 onLogout, // 로그아웃을 처리해주는 함수
                 onRegister, // 회원가입을 처리해주는 함수
                 regComplete, // 회원가입 완료 상태를 알려주는 변수
-                GetUserData, // 유저 데이터를 반환하는 함수
+                userData, // 유저 데이타
             }}
         >
             {children}

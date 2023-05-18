@@ -107,6 +107,7 @@ export default function RegisterForm() {
         }
     }
 
+    // 회원가입하기
     const confirm = async (e) => {
         const registerData = {
             userId: userId,
