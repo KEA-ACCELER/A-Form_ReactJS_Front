@@ -69,7 +69,6 @@ function CreateSurvey() {
         }
     };
     useEffect(() => {
-        console.log(isLogin);
         CheckLogin();
     }, [isLogin]);
 
@@ -94,12 +93,54 @@ function CreateSurvey() {
 
     // Save Form state
     const [saveIsLoading, setSaveIsLoading] = useState(false);
-    const saveSurveyHandler = () => {
-        if (!aiIsLoading) {
-            if (title === "") {
-                alert("enter in a title");
-                return;
+    const checkFormFilled = () => {
+        if (title === "") {
+            alert("enter in a title");
+            return false;
+        }
+        if (description === "") {
+            alert("enter description");
+            return false;
+        }
+        if (questions.length === 0) {
+            alert("Add at least one question!");
+            return false;
+        }
+        let checkQTitle = true;
+        let checkQContent = true;
+        let checkQSelections = true;
+        questions.forEach((q) => {
+            console.log(q.title);
+            console.log(q);
+            console.log(questions);
+            if (q.title == "") {
+                checkQTitle = false;
             }
+            if (q.selections.length === 0) {
+                checkQSelections = false;
+            }
+            q.selections.forEach((selection) => {
+                if ((q.type == "RADIO" || "CHECKBOX") && selection.content == "") {
+                    checkQContent = false;
+                }
+            });
+        });
+        if (!checkQTitle) {
+            alert("All Survey Cards need a title");
+            return false;
+        }
+        if (!checkQSelections) {
+            alert("Add at least one selection!");
+            return false;
+        }
+        if (!checkQContent) {
+            alert("All Survey Card's selection need a content");
+            return false;
+        }
+        return true;
+    };
+    const saveSurveyHandler = () => {
+        if (!aiIsLoading && checkFormFilled()) {
             setSaveIsLoading(true);
             toastPromise(handleSubmit);
             setTimeout(() => {
