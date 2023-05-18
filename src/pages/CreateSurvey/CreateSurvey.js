@@ -242,7 +242,13 @@ function CreateSurvey() {
                 {questions.map((q, index) => (
                   <Draggable key={q.id} draggableId={`draggable-${q.id}`} index={index}>
                     {(provided) => (
-                      <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                      <div
+                        className="draggableFormWrapper"
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={{ ...provided.draggableProps.style }}
+                      >
                         <QuestionForm
                           forCreate={true}
                           type={q.type}
