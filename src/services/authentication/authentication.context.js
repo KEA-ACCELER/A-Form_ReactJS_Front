@@ -6,7 +6,7 @@ export const AuthenticationContext = createContext();
 
 export const AuthenticationContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [userToken, setUserToken] = useState(null);
+    const [userToken, setUserToken] = useState(localStorage.getItem("userToken"));
     const [isLogin, setIsLogin] = useState(localStorage.getItem("isLoggedIn"));
     const [regComplete, setRegComplete] = useState(false);
 
@@ -20,6 +20,7 @@ export const AuthenticationContextProvider = ({ children }) => {
             alert("비밀번호가 일치하지 않습니다.");
             return;
         } else {
+            localStorage.setItem("userToken", loginRes.data);
             setUserToken(loginRes.data);
             localStorage.setItem("isLoggedIn", true);
             setIsLogin(true);
@@ -32,6 +33,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         setIsLogin(false);
         alert("로그아웃 되었습니다!");
         localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userToken");
 
         window.location.reload();
     };

@@ -59,11 +59,22 @@ const mockData = {
     description: "string",
 };
 function CreateSurvey() {
-    // react state
+    // Navigation
     const navigate = useNavigate();
-
+    // Survey Context
+    const { CreateSurvey, AIGenerateSurvey } = useContext(SurveyContext); // Form 작성 완료 handler를 context에서 불러온다
     // User Token, isLogin
     const { userToken, isLogin } = useContext(AuthenticationContext);
+    const CheckLogin = () => {
+        if (isLogin == false) {
+            alert("로그인이 필요한 서비스 입니다.");
+            navigate(-1);
+        }
+    };
+    useEffect(() => {
+        console.log(isLogin);
+        CheckLogin();
+    }, [isLogin]);
 
     // survey state
     const [title, setTitle] = useState("");
@@ -84,6 +95,30 @@ function CreateSurvey() {
         });
     };
 
+    // Save Form state
+    const [saveIsLoading, setSaveIsLoading] = useState(false);
+    const saveSurveyHandler = () => {
+        if (!aiIsLoading) {
+            if (title === "") {
+                alert("enter in a title");
+                return;
+            }
+            setSaveIsLoading(true);
+            toastPromise(handleSubmit);
+            setTimeout(() => {
+                setSaveIsLoading(false);
+            }, 3000);
+        }
+    };
+    // Submit
+    const handleSubmit = async () => {
+        const type = "NORMAL";
+        setConfirmModalShow(false);
+        let newId = await CreateSurvey(type, title, description, questions, userToken);
+        setSurveyId(newId);
+        // setLinkModalShow(true);
+    };
+
     // ai state //
     const [aiIsLoading, setAiIsLoading] = useState(false);
     const AIGenerateHandler = () => {
@@ -98,40 +133,10 @@ function CreateSurvey() {
             }, 3000);
         }
     };
-
-    // Save state
-    const [saveIsLoading, setSaveIsLoading] = useState(false);
-    const resolveAfter3Sec = new Promise((resolve) => setTimeout(resolve, 1000));
-    const saveSurveyHandler = () => {
-        if (!aiIsLoading) {
-            setSaveIsLoading(true);
-            toastPromise(resolveAfter3Sec);
-            setTimeout(() => {
-                setSaveIsLoading(false);
-            }, 3000);
-        }
-    };
-
-    // Create
-    const { CreateSurvey, AIGenerateSurvey } = useContext(SurveyContext); // Form 작성 완료 handler를 context에서 불러온다
-
-    // Not login hanlder
-    const CheckLogin = () => {
-        if (isLogin == false) {
-            alert("로그인이 필요한 서비스 입니다.");
-            navigate(-1);
-        }
-    };
-    useEffect(() => {
-        console.log(isLogin);
-        CheckLogin();
-    }, [isLogin]);
-
     /* Modal */
     // Modal state
     const [linkModalShow, setLinkModalShow] = useState(false);
     const [confirmModalShow, setConfirmModalShow] = useState(false);
-    const [deadline, setDeadline] = useState("");
     const [surveyId, setSurveyId] = useState("");
     // Modal Function
     const handleClose = () => {
@@ -141,27 +146,6 @@ function CreateSurvey() {
     const handleConfirmModalClose = () => {
         setConfirmModalShow(false);
     };
-
-    // Submit
-    const handleSubmit = async () => {
-        const type = "NORMAL";
-        setConfirmModalShow(false);
-        let newId = await CreateSurvey(type, deadline, title, description, questions, userToken);
-        setSurveyId(newId);
-        setLinkModalShow(true);
-    };
-    // When click "Complete Form" Button
-    const handleCreate = useCallback(
-        (title) => {
-            if (title === "") {
-                alert("enter in a title");
-                return;
-            } else {
-                setConfirmModalShow(true);
-            }
-        },
-        [confirmModalShow]
-    );
 
     // TODO : X 표시를 누르면 해당 문제의 정보가 삭제된다.
     const delQuestion = useCallback((index) => {
