@@ -8,6 +8,8 @@ import "../Survey/Survey.css";
 import { ConfirmSurveyModal, LinkModal } from "../../components/Modal/ConfirmSurveyModal";
 import { SurveyContext } from "../../services/survey/survey.context";
 import { AuthenticationContext } from "../../services/authentication/authentication.context";
+import { PostContext } from "../../services/post/post.context";
+
 import { SiProbot } from "react-icons/si";
 import FadeIn from "../../animation/FadeIn";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -59,10 +61,11 @@ const mockData = {
 function CreateSurvey() {
     // Navigation
     const navigate = useNavigate();
-    // Survey Context
-    const { CreateSurvey, AIGenerateSurvey } = useContext(SurveyContext); // Form 작성 완료 handler를 context에서 불러온다
-    // User Token, isLogin
-    const { userToken, isLogin } = useContext(AuthenticationContext);
+    // Context
+    const { CreateSurvey, AIGenerateSurvey } = useContext(SurveyContext); // Survey
+    const { CreatePost } = useContext(PostContext); // Post
+    const { userToken, isLogin } = useContext(AuthenticationContext); // User Token, isLogin
+
     const CheckLogin = () => {
         if (isLogin == false) {
             alert("로그인이 필요한 서비스 입니다.");
@@ -70,7 +73,6 @@ function CreateSurvey() {
         }
     };
     useEffect(() => {
-        console.log(isLogin);
         CheckLogin();
     }, [isLogin]);
 
@@ -78,6 +80,8 @@ function CreateSurvey() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)
+    const [surveyId, setSurveyId] = useState("");
+    const [postId, setPostId] = useState("");
     const nextCardId = useRef(0); // surveyCard 아이디
 
     const toastPromise = (promise) => {
@@ -95,12 +99,54 @@ function CreateSurvey() {
 
     // Save Form state
     const [saveIsLoading, setSaveIsLoading] = useState(false);
-    const saveSurveyHandler = () => {
-        if (!aiIsLoading) {
-            if (title === "") {
-                alert("enter in a title");
-                return;
+    const checkFormFilled = () => {
+        if (title === "") {
+            alert("enter in a title");
+            return false;
+        }
+        if (description === "") {
+            alert("enter description");
+            return false;
+        }
+        if (questions.length === 0) {
+            alert("Add at least one question!");
+            return false;
+        }
+        let checkQTitle = true;
+        let checkQContent = true;
+        let checkQSelections = true;
+        questions.forEach((q) => {
+            console.log(q.title);
+            console.log(q);
+            console.log(questions);
+            if (q.title == "") {
+                checkQTitle = false;
             }
+            if (q.selections.length === 0) {
+                checkQSelections = false;
+            }
+            q.selections.forEach((selection) => {
+                if ((q.type == "RADIO" || "CHECKBOX") && selection.content == "") {
+                    checkQContent = false;
+                }
+            });
+        });
+        if (!checkQTitle) {
+            alert("All Survey Cards need a title");
+            return false;
+        }
+        if (!checkQSelections) {
+            alert("Add at least one selection!");
+            return false;
+        }
+        if (!checkQContent) {
+            alert("All Survey Card's selection need a content");
+            return false;
+        }
+        return true;
+    };
+    const saveSurveyHandler = () => {
+        if (!aiIsLoading && checkFormFilled()) {
             setSaveIsLoading(true);
             toastPromise(handleSubmit);
             setTimeout(() => {
@@ -114,9 +160,12 @@ function CreateSurvey() {
         setConfirmModalShow(false);
         let newId = await CreateSurvey(type, title, description, questions, userToken);
         setSurveyId(newId);
-        // setLinkModalShow(true);
     };
-
+    // Create Post
+    const createPostHandler = async () => {
+        let id = await CreatePost(title, description, surveyId, userToken);
+        setPostId(id);
+    };
     // ai state //
     const [aiIsLoading, setAiIsLoading] = useState(false);
     const AIGenerateHandler = () => {
@@ -135,7 +184,7 @@ function CreateSurvey() {
     // Modal state
     const [linkModalShow, setLinkModalShow] = useState(false);
     const [confirmModalShow, setConfirmModalShow] = useState(false);
-    const [surveyId, setSurveyId] = useState("");
+
     // Modal Function
     const handleClose = () => {
         setLinkModalShow(false);
@@ -212,8 +261,8 @@ function CreateSurvey() {
     return (
         <div className="CreateSurvey Survey">
             <FadeIn className="surveyWrapper" childClassName="childClassName">
-                <ConfirmSurveyModal modalShow={confirmModalShow} handleModalClose={handleConfirmModalClose} onSubmit={handleSubmit} />
-                <LinkModal modalShow={linkModalShow} handleModalClose={handleClose} surveyId={surveyId} />
+                <ConfirmSurveyModal modalShow={confirmModalShow} handleModalClose={handleConfirmModalClose} onSubmit={createPostHandler} />
+                <LinkModal modalShow={linkModalShow} handleModalClose={handleClose} postId={postId} />
 
                 <div className="text-wrapper">
                     <input

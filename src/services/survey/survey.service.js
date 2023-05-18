@@ -22,7 +22,6 @@ export const CreateSurvey = (type, title, description, questions, userToken) => 
         .post(`${SURVEY_API_URL}/api/surveys`, newSurvey, options)
         .then((response) => {
             console.log(response.data);
-            alert(response.data);
             return response.data;
         })
         .catch((err) => {
@@ -33,7 +32,7 @@ export const CreateSurvey = (type, title, description, questions, userToken) => 
 };
 
 export const DeleteSurvey = async (surveyid, userToken) => {
-  const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
+    const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
 
     const result = await axios
         .delete(`${SURVEY_API_URL}/api/surveys/${surveyid}`, options)
@@ -58,8 +57,8 @@ export const GetSurveyById = async (id) => {
 };
 
 export const PostSurveyAnswer = async (surveyAnswer, userToken) => {
-  const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
-  console.log("answer: ", surveyAnswer);
+    const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
+    console.log("answer: ", surveyAnswer);
 
     const result = await axios
         .post(`${SURVEY_API_URL}/api/answers`, surveyAnswer, options)
@@ -73,17 +72,17 @@ export const PostSurveyAnswer = async (surveyAnswer, userToken) => {
 };
 
 export const AIGenerateSurvey = async (msg, userToken) => {
-  const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
-  const body = {
-    msg: msg,
-  };
-  const result = await axios
-    .post(`${AI_API_URL}/chatbot`, body, options)
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  return result;
+    const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
+    const body = {
+        msg: msg,
+    };
+    const result = await axios
+        .post(`${AI_API_URL}/chatbot`, body, options)
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    return result;
 };

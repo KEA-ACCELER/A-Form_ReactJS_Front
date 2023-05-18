@@ -41,20 +41,20 @@ export const ConfirmSurveyModal = ({ modalShow, handleModalClose, onSubmit }) =>
     );
 };
 
-export const LinkModal = ({ modalShow, handleModalClose, surveyId }) => {
+export const LinkModal = ({ modalShow, handleModalClose, postId }) => {
     const navigate = useNavigate();
     return (
         <Modal show={modalShow} onHide={handleModalClose} className="sendFormModal">
             <Modal.Header closeButton>
-                <Modal.Title>Form Created!</Modal.Title>
+                <Modal.Title>Publsh Complete!!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Form Link</Modal.Body>
-            <input disabled className="formLinkInput" type="text" value={`http://localhost:3000/details/${surveyId}`} />
+            <Modal.Body>Post Link</Modal.Body>
+            <input disabled className="formLinkInput" type="text" value={`http://localhost:3000/details/${postId}`} />
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleModalClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={() => navigate(`/details/${surveyId}`)}>
+                <Button variant="primary" onClick={() => navigate(`/details/${postId}`)}>
                     Follow Link
                 </Button>
             </Modal.Footer>
