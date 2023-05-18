@@ -9,10 +9,17 @@ export const AuthenticationContextProvider = ({ children }) => {
     const [userToken, setUserToken] = useState(localStorage.getItem("userToken"));
     const [isLogin, setIsLogin] = useState(localStorage.getItem("isLoggedIn"));
     const [regComplete, setRegComplete] = useState(false);
+    const [userData, setUserData] = useState("");
 
+    useEffect(() => {
+        if (userToken != "") {
+            setUserData(GetUserData(userToken));
+        }
+    }, [userToken]);
     const onLogin = async (userId, userPassword) => {
         let loginRes = await loginHandler(userId, userPassword);
         console.log(loginRes);
+
         if (loginRes.data == "아이디가 존재하지 않습니다.") {
             alert("아이디가 존재하지 않습니다.");
             return;
