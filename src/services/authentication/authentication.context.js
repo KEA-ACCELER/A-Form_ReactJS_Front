@@ -42,6 +42,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         setRegComplete(false);
         let loginRes = await registerHandler(registerData);
         setRegComplete(loginRes);
+        return loginRes;
     };
 
     return (
