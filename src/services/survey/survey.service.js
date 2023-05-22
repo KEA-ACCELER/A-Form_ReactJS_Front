@@ -56,12 +56,12 @@ export const GetSurveyById = async (id) => {
     return result;
 };
 
-export const PostSurveyAnswer = async (surveyAnswer, userToken) => {
+export const PostSurveyAnswer = async (surveyAnswer, surveyId, userToken) => {
     const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
     console.log("answer: ", surveyAnswer);
 
     const result = await axios
-        .post(`${SURVEY_API_URL}/api/answers`, surveyAnswer, options)
+        .post(`${SURVEY_API_URL}/api/surveys/${surveyId}/answers`, surveyAnswer, options)
         .then((response) => {
             console.log(response.data);
         })
