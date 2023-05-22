@@ -74,7 +74,9 @@ function CreateSurvey() {
         if (!localStorage.getItem("isLoggedIn")) {
             alert("로그인이 필요한 서비스 입니다.");
             navigate(-1);
+            return;
         }
+        templateLoader();
     };
     // onTemplate Load
     const templateLoader = () => {
@@ -97,7 +99,6 @@ function CreateSurvey() {
     useEffect(() => {
         CheckLogin();
         console.log(location);
-        templateLoader();
     }, []);
 
     // survey state
@@ -186,8 +187,8 @@ function CreateSurvey() {
         setSurveyId(newId);
     };
     // Create Post
-    const createPostHandler = async () => {
-        await CreatePost(title, description, surveyId, userData.userPk).then((res) => {
+    const createPostHandler = async (startDate, endDate) => {
+        await CreatePost(title, description, surveyId, startDate, endDate, userData.userPk).then((res) => {
             setPostPk(res.postPk);
         });
         setConfirmModalShow(false);

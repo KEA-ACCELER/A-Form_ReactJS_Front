@@ -12,7 +12,6 @@ import "react-clock/dist/Clock.css";
 export const ConfirmSurveyModal = ({ modalShow, handleModalClose, onSubmit }) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
-    const [value, onChange] = useState(new Date());
 
     useEffect(() => {
         console.log(startDate);
@@ -25,15 +24,15 @@ export const ConfirmSurveyModal = ({ modalShow, handleModalClose, onSubmit }) =>
             <Modal.Body>
                 <div>Select Category</div>
                 <div>Select start date</div>
-                <DateTimePicker onChange={setStartDate} value={startDate} disableClock={true} />
+                <DateTimePicker onChange={setStartDate} value={startDate} disableClock={true} minDate={new Date()} locale="ko" />
                 <div>Select end date</div>
-                <DateTimePicker onChange={setEndDate} value={endDate} disableClock={true} />
+                <DateTimePicker onChange={setEndDate} value={endDate} disableClock={true} minDate={new Date()} locale="ko" />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleModalClose}>
                     No, Keep editing
                 </Button>
-                <Button variant="primary" onClick={onSubmit}>
+                <Button variant="primary" onClick={() => onSubmit(startDate.toISOString(), endDate.toISOString())}>
                     Yes
                 </Button>
             </Modal.Footer>

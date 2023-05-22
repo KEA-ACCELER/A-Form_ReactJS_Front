@@ -11,6 +11,8 @@ import { AuthenticationContext } from "../../services/authentication/authenticat
 import FadeIn from "../../animation/FadeIn";
 import { PostContext } from "../../services/post/post.context";
 
+const TIME_ZONE = 9;
+
 export const Post = () => {
     // Context
     const { GetSurveyById, DeleteSurvey } = useContext(SurveyContext);
@@ -125,12 +127,16 @@ export const Post = () => {
                                     </Button>
                                 </div>
                             </div>
-                            <div>view : {postData.postViews}</div>
-                            <div>
-                                start : {postData.postStartDate[0]}년{postData.postStartDate[1]}월{postData.postStartDate[2]}일
+                            <div className="postViews">
+                                <b>조회수 :</b> {postData.postViews}
                             </div>
-                            <div>
-                                end : {postData.postDueDate[0]}년{postData.postDueDate[1]}월{postData.postDueDate[2]}일
+                            <div className="postStartDate">
+                                <b>설문 시작 시간 : </b>
+                                {postData.postStartDate[0]}년 {postData.postStartDate[1]}월 {postData.postStartDate[2]}일 {postData.postStartDate[3] + TIME_ZONE}시 {postData.postStartDate[4]}분
+                            </div>
+                            <div className="postDueDate">
+                                <b>설문 마감 기한 : </b>
+                                {postData.postDueDate[0]}년 {postData.postDueDate[1]}월 {postData.postDueDate[2]}일 {postData.postDueDate[3] + TIME_ZONE}시 {postData.postDueDate[4]}분
                             </div>
                             <div className="statistics">
                                 <h3>통계</h3>

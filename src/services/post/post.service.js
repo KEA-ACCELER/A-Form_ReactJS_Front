@@ -2,7 +2,7 @@ import axios from "axios";
 
 const POST_API_URL = process.env.REACT_APP_POST_API_URL;
 
-export const CreatePost = async (postTitle, postDesc, postSurvey, userPk) => {
+export const CreatePost = async (postTitle, postDesc, postSurvey, startDate, endDate, userPk) => {
     // send newSurvey to database
     const options = { headers: { accept: "application/json", "Content-Type": "application/json" } };
     const newPost = {
@@ -10,10 +10,10 @@ export const CreatePost = async (postTitle, postDesc, postSurvey, userPk) => {
         postDesc: postDesc,
         postSurvey: postSurvey,
         author: userPk,
-        postStartDate: "2023-05-18T08:21:18.695Z",
-        postDueDate: "2023-05-18T08:21:18.695Z",
+        postStartDate: startDate,
+        postDueDate: endDate,
     };
-    console.log(newPost);
+    console.log("newPost : ", newPost);
 
     const postId = await axios
         .post(`${POST_API_URL}/api/post/create`, newPost, options)

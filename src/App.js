@@ -31,7 +31,16 @@ function App() {
         <AuthenticationContextProvider>
             <SurveyContextProvider>
                 <PostContextProvider>
-                    <ToastContainer className="Toast" closeButton={false} position={toast.POSITION.TOP_CENTER} icon={false} pauseOnFocusLoss={false} autoClose={1000} />
+                    <ToastContainer
+                        className="Toast"
+                        closeButton={false}
+                        position={toast.POSITION.TOP_CENTER}
+                        icon={false}
+                        pauseOnFocusLoss={false}
+                        autoClose={1000}
+                        pauseOnHover={false}
+                        hideProgressBar={true}
+                    />
                     <BrowserRouter>
                         <Routes>
                             <Route path="/" element={<Layout />}>
