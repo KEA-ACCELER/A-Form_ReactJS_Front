@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext, useEffect, useCallback } from "react";
 import { Form, Spinner } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import QuestionForm from "../../components/forms/QuestionForm";
 import AddingOption from "../../components/forms/AddingOption";
 import Button from "react-bootstrap/Button";
@@ -36,6 +36,7 @@ const mockData = {
                     content: "아니오",
                 },
             ],
+            isRequired: false,
         },
         {
             title: "A-Form을 어떻게 알게 되었습니까",
@@ -54,6 +55,7 @@ const mockData = {
                     content: "Instagram을 통해서",
                 },
             ],
+            isRequired: false,
         },
     ],
     description: "string",
@@ -61,10 +63,12 @@ const mockData = {
 function CreateSurvey() {
     // Navigation
     const navigate = useNavigate();
+    const location = useLocation();
+
     // Context
-    const { CreateSurvey, AIGenerateSurvey } = useContext(SurveyContext); // Survey
-    const { CreatePost } = useContext(PostContext); // Post
     const { userToken, isLogin, userData } = useContext(AuthenticationContext); // User Token, isLogin
+    const { CreateSurvey, AIGenerateSurvey, GetSurveyById } = useContext(SurveyContext); // Survey
+    const { CreatePost } = useContext(PostContext); // Post
 
     const CheckLogin = () => {
         if (!localStorage.getItem("isLoggedIn")) {
@@ -72,8 +76,27 @@ function CreateSurvey() {
             navigate(-1);
         }
     };
+    const templateLoader = () => {
+        if (location.state != null) {
+            setSurveyId(location.state.id);
+            GetSurveyById(location.state.id).then((res) => {
+                setTitle(res.data.title);
+                setDescription(res.data.description);
+                setQuestions(
+                    res.data.questions.map((it, index) => {
+                        it.id = index;
+                        return it;
+                    })
+                );
+                nextCardId.current = res.data.questions.length;
+                toast.success("Template Loaded!");
+            });
+        }
+    };
     useEffect(() => {
         CheckLogin();
+        console.log(location);
+        templateLoader();
     }, []);
 
     // survey state
