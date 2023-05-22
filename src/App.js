@@ -8,7 +8,7 @@ import About from "./pages/About/About";
 import RegisterForm from "./pages/RegisterForm/RegisterForm";
 import { CreateAvsB } from "./pages/CreateAvsB/CreateAvsB";
 import { Community } from "./pages/Community/Community";
-import { SurveyDetail } from "./pages/Survey/SurveyDetail";
+import { Post } from "./pages/Survey/Post";
 import LoginForm from "./pages/LoginForm/LoginForm";
 import Mypage from "./pages/Mypage/Mypage";
 import Mypage_setting from "./pages/Mypage/Mypage_setting";
@@ -45,7 +45,7 @@ function App() {
                                 <Route path="community" element={<Community />} />
                                 <Route path="AvsB" element={<CreateAvsB />} />
                                 <Route path="mypage_setting" element={<Mypage_setting />} />
-                                <Route path="details/:id" element={<SurveyDetail />} />
+                                <Route path="post/:postPk" element={<Post />} />
                             </Route>
                         </Routes>
                     </BrowserRouter>

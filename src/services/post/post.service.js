@@ -2,7 +2,7 @@ import axios from "axios";
 
 const POST_API_URL = process.env.REACT_APP_POST_API_URL;
 
-export const CreatePost = (postTitle, postDesc, postSurvey, userPk) => {
+export const CreatePost = async (postTitle, postDesc, postSurvey, userPk) => {
     // send newSurvey to database
     const options = { headers: { accept: "application/json", "Content-Type": "application/json" } };
     const newPost = {
@@ -15,16 +15,27 @@ export const CreatePost = (postTitle, postDesc, postSurvey, userPk) => {
     };
     console.log(newPost);
 
-    const postId = axios
+    const postId = await axios
         .post(`${POST_API_URL}/api/post/create`, newPost, options)
         .then((response) => {
             console.log(response.data);
-            alert(response.data);
             return response.data;
         })
         .catch((err) => {
             console.log(err);
         });
-    console.log(postId);
     return postId;
+};
+
+export const GetPost = async (postPk) => {
+    const res = await axios
+        .get(`${POST_API_URL}/api/post/getPost/${postPk}`)
+        .then((response) => {
+            console.log(response.data);
+            return response.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    return res;
 };

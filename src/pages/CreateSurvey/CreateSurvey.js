@@ -76,6 +76,7 @@ function CreateSurvey() {
             navigate(-1);
         }
     };
+    // onTemplate Load
     const templateLoader = () => {
         if (location.state != null) {
             setSurveyId(location.state.id);
@@ -104,7 +105,7 @@ function CreateSurvey() {
     const [description, setDescription] = useState("");
     const [questions, setQuestions] = useState([]); //index, state(어떤 타입의 질문인지)
     const [surveyId, setSurveyId] = useState("");
-    const [postId, setPostId] = useState("");
+    const [postPk, setPostPk] = useState("");
     const nextCardId = useRef(0); // surveyCard 아이디
 
     const toastPromise = (promise) => {
@@ -186,8 +187,11 @@ function CreateSurvey() {
     };
     // Create Post
     const createPostHandler = async () => {
-        let id = await CreatePost(title, description, surveyId, userData.userPk);
-        setPostId(id);
+        await CreatePost(title, description, surveyId, userData.userPk).then((res) => {
+            setPostPk(res.postPk);
+        });
+        setConfirmModalShow(false);
+        setLinkModalShow(true);
     };
     // ai state //
     const [aiIsLoading, setAiIsLoading] = useState(false);
@@ -285,7 +289,7 @@ function CreateSurvey() {
         <div className="CreateSurvey Survey">
             <FadeIn className="surveyWrapper" childClassName="childClassName">
                 <ConfirmSurveyModal modalShow={confirmModalShow} handleModalClose={handleConfirmModalClose} onSubmit={createPostHandler} />
-                <LinkModal modalShow={linkModalShow} handleModalClose={handleClose} postId={postId} />
+                <LinkModal modalShow={linkModalShow} handleModalClose={handleClose} postPk={postPk} />
 
                 <div className="text-wrapper">
                     <input
