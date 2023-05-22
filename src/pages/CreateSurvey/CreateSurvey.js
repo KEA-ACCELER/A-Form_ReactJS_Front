@@ -98,7 +98,6 @@ function CreateSurvey() {
     };
     useEffect(() => {
         CheckLogin();
-        console.log(location);
     }, []);
 
     // survey state
