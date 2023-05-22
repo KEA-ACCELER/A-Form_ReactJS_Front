@@ -86,3 +86,13 @@ export const AIGenerateSurvey = async (msg, userToken) => {
         });
     return result;
 };
+
+export const getAnsweredSurveys = async (id, userToken) => {
+    const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
+    try {
+        const result = await axios.get(`${SURVEY_API_URL}/api/surveys/my-page/surveys/${id}/answers`, options);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+};

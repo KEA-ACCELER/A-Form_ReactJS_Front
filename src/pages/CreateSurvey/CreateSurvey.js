@@ -37,6 +37,7 @@ const mockData = {
                 },
             ],
             isRequired: false,
+            isRequired: false,
         },
         {
             title: "A-Form을 어떻게 알게 되었습니까",
@@ -56,6 +57,7 @@ const mockData = {
                 },
             ],
             isRequired: false,
+            isRequired: false,
         },
     ],
     description: "string",
@@ -74,26 +76,6 @@ function CreateSurvey() {
         if (!localStorage.getItem("isLoggedIn")) {
             alert("로그인이 필요한 서비스 입니다.");
             navigate(-1);
-            return;
-        }
-        templateLoader();
-    };
-    // onTemplate Load
-    const templateLoader = () => {
-        if (location.state != null) {
-            setSurveyId(location.state.id);
-            GetSurveyById(location.state.id).then((res) => {
-                setTitle(res.data.title);
-                setDescription(res.data.description);
-                setQuestions(
-                    res.data.questions.map((it, index) => {
-                        it.id = index;
-                        return it;
-                    })
-                );
-                nextCardId.current = res.data.questions.length;
-                toast.success("Template Loaded!");
-            });
         }
     };
     useEffect(() => {
