@@ -21,7 +21,11 @@ export const Comment = (props) => {
     };
     const onDelete = () => {
         DeleteComment(props.commentPk);
-        props.getCommentData();
+        props.setCommentsData(
+            props.commentsData.filter((it) => {
+                return it.commentPk == props.commentPk ? null : it;
+            })
+        );
         setShow(false);
     };
     const popover = (

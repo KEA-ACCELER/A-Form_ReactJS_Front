@@ -108,7 +108,8 @@ export const Post = () => {
                                   createdDate={it.createdDate}
                                   modifiedDate={it.modifiedDate}
                                   commentLike={it.commentLike}
-                                  getCommentData={getCommentData}
+                                  setCommentsData={setCommentsData}
+                                  commentsData={commentsData}
                               />
                           );
                       })
