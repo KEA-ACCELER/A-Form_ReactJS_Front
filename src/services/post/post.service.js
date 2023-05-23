@@ -69,3 +69,10 @@ export const GetComments = async (postPk, size, page) => {
 
     return res;
 };
+
+export const DeleteComment = async (commentPk) => {
+    await axios
+        .delete(`${POST_API_URL}/api/comment/delete/${commentPk}`)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+};

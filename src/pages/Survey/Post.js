@@ -104,9 +104,11 @@ export const Post = () => {
                                   commentAuthor={it.commentAuthor}
                                   commentContent={it.commentContent}
                                   key={it.commentPk}
+                                  commentPk={it.commentPk}
                                   createdDate={it.createdDate}
                                   modifiedDate={it.modifiedDate}
                                   commentLike={it.commentLike}
+                                  getCommentData={getCommentData}
                               />
                           );
                       })

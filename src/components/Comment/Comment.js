@@ -2,26 +2,47 @@ import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 import "./Comment.css";
 import { FiMoreVertical } from "react-icons/fi";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PostContext } from "../../services/post/post.context";
+import { AuthenticationContext } from "../../services/authentication/authentication.context";
 
 export const Comment = (props) => {
+    const { DeleteComment } = useContext(PostContext);
+    const { userData } = useContext(AuthenticationContext);
+    const checkAuthor = () => {
+        if (props.commentAuthor == userData.userPk) return true;
+        return false;
+    };
     const [show, setShow] = useState(false);
     const [liked, setLiked] = useState(false);
+
     const onEdit = () => {
         setShow(false);
     };
     const onDelete = () => {
+        DeleteComment(props.commentPk);
+        props.getCommentData();
         setShow(false);
     };
     const popover = (
         <Popover>
             <Popover.Body className="commentPopover">
-                <button className="commentMoreBtn" onClick={onEdit}>
-                    수정
-                </button>
-                <button className="commentMoreBtn" onClick={onDelete}>
-                    삭제
-                </button>
+                {checkAuthor() ? (
+                    <>
+                        <button className="commentMoreBtn" onClick={onEdit}>
+                            수정
+                        </button>
+                        <button className="commentMoreBtn" onClick={onDelete}>
+                            삭제
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        <button className="commentMoreBtn" onClick={onDelete}>
+                            신고하기
+                        </button>
+                    </>
+                )}
             </Popover.Body>
         </Popover>
     );
