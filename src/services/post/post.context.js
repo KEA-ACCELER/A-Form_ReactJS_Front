@@ -3,5 +3,19 @@ import { CreatePost, GetPost, PostComment, GetComments, DeleteComment, CreateCat
 export const PostContext = createContext();
 
 export const PostContextProvider = ({ children }) => {
-    return <PostContext.Provider value={{ CreatePost, GetPost, PostComment, GetComments, DeleteComment, CreateCategory, GetPostCategory }}>{children}</PostContext.Provider>;
+    return (
+        <PostContext.Provider
+            value={{
+                CreatePost,
+                GetPost,
+                PostComment,
+                GetComments,
+                DeleteComment,
+                CreateCategory,
+                GetPostCategory,
+            }}
+        >
+            {children}
+        </PostContext.Provider>
+    );
 };

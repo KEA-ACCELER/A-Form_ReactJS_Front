@@ -5,10 +5,16 @@ const POST_API_URL = process.env.REACT_APP_POST_API_URL;
 /* Category */
 
 export const CreateCategory = async (categoryType, postPk) => {
+    const body = {
+        categoryType: categoryType,
+        postPk: postPk,
+    };
+
     const res = axios
-        .post(`${POST_API_URL}/api/postCategory/create`)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .post(`${POST_API_URL}/api/postCategory/create`, body)
+        .then((res) => console.log("CreateCategoryRes : ", res))
+        .catch((err) => console.log("CreateCategoryErr : ", err));
+    return res;
 };
 
 export const GetPostCategory = async (postPk) => {

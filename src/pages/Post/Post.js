@@ -120,7 +120,7 @@ export const Post = () => {
     return (
         <>
             {loaded ? (
-                <div className="SurveyDetail Survey">
+                <div className="Post Survey">
                     <DeleteSurveyModal modalShow={modalShow} modalClose={modalCloseHandler} onDelete={DeleteSurveyHandler} />
                     <FadeIn className="surveyWrapper" childClassName="childClassName">
                         <div className="contentWrapper">
@@ -179,7 +179,7 @@ export const Post = () => {
                     </FadeIn>
                 </div>
             ) : (
-                <div className="SurveyDetail Survey"></div>
+                <div className="Post Survey"></div>
             )}
         </>
     );
