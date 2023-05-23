@@ -26,6 +26,7 @@ export const Comment = (props) => {
                 return it.commentPk == props.commentPk ? null : it;
             })
         );
+        props.getCommentData();
         setShow(false);
     };
     const popover = (
