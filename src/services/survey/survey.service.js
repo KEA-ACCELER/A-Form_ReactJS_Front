@@ -2,7 +2,6 @@ import axios from "axios";
 
 const SURVEY_API_URL = process.env.REACT_APP_SURVEY_API_URL;
 const AI_API_URL = process.env.REACT_APP_AI_API_URL;
-const POST_API_URL = process.env.REACT_APP_POST_API_URL;
 
 export const CreateSurvey = (type, title, description, questions, userToken) => {
   // send newSurvey to database
@@ -88,12 +87,16 @@ export const AIGenerateSurvey = async (msg, userToken) => {
   return result;
 };
 
-export const getAnsweredSurveys = async (userPk, itemNum, pageIndex, userToken) => {
+export const GetAnsweredSurveys = async (page, offset, userToken) => {
+  console.log(page, offset, userToken);
   const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
-  try {
-    const result = await axios.get(`${POST_API_URL}/api/post/getUserPosts/${userPk}/${itemNum}/${pageIndex}`, options);
-    return result;
-  } catch (error) {
-    console.log(error);
-  }
+
+  const result = await axios
+    .get(`${SURVEY_API_URL}/api/surveys/my-page/surveys/answers?page=${page}&offset=${offset}`, options)
+    .then((res) => {
+      console.log("getanswer", res);
+      return res.data.data;
+    })
+    .catch((err) => console.log(err));
+  return result;
 };
