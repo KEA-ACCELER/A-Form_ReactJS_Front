@@ -68,8 +68,16 @@ export const GetUserData = async (userToken) => {
 
 export const getIdCheck = async (userId) => {
   console.log("id 중복체크");
-  const res = await axios.get(`${USER_API_URL}/api/user/idcheck/${userId}`);
-  return res;
+  const result = await axios
+    .get(`${USER_API_URL}/api/user/idCheck/${userId}`)
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return result;
 };
 
 /*
