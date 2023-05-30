@@ -56,7 +56,7 @@ export const Post = () => {
 
     // Check is Author
     useEffect(() => {
-        if (isLogin) {
+        if (userData != undefined && isLogin) {
             console.log("id match : ", userData.userPk, postData.postAuthor);
             if (userData.userPk == postData.author) {
                 console.log("daifjsjfis");
