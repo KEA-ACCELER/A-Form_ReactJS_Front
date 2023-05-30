@@ -18,9 +18,9 @@ export const CreateCategory = async (categoryType, postPk) => {
 
 export const GetPostCategory = async (postPk) => {
     const res = axios
-        .post(`${POST_API_URL}/api/postCategory/get/${postPk}`)
+        .get(`${POST_API_URL}/api/postCategory/get/${postPk}`)
         .then((res) => {
-            console.log(res);
+            console.log("postCat : ", res.data);
             return res.data;
         })
         .catch((err) => console.log(err));
@@ -112,8 +112,15 @@ export const GetCommentCnt = async (postPk) => {
     return res;
 };
 
-export const PostCommentLike = async () => {
-    await axios.post();
+export const PostCommentLike = async (userPk, commentPk) => {
+    const body = {
+        commentLikeUser: userPk,
+        commentPk: commentPk,
+    };
+    await axios
+        .post(`${POST_API_URL}/api/commentLike/likeButtonClicked`, body)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
 };
 
 export const GetPostSurveys = async (userPk, itemNum, pageIndex) => {
