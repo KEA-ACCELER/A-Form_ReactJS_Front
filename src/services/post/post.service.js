@@ -115,3 +115,16 @@ export const GetCommentCnt = async (postPk) => {
 export const PostCommentLike = async () => {
     await axios.post();
 };
+
+export const GetPostSurveys = async (userPk, itemNum, pageIndex) => {
+    console.log(userPk, itemNum, pageIndex);
+    const options = { headers: { accept: "application/json", "Content-Type": "application/json" } };
+    const result = await axios
+        .get(`${POST_API_URL}/api/post/getUserPosts/${userPk}/${itemNum}/${pageIndex}`, options)
+        .then((res) => {
+            console.log("getpost", res);
+            return res.data;
+        })
+        .catch((err) => console.log(err));
+    return result;
+};
