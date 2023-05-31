@@ -1,5 +1,18 @@
 import React, { createContext } from "react";
-import { CreatePost, GetPost, PostComment, GetComments, DeleteComment, CreateCategory, GetPostCategory, GetPostSurveys, GetCommentCnt, PostCommentLike, GetAllCategory } from "./post.service";
+import {
+    CreatePost,
+    GetPost,
+    PostComment,
+    GetComments,
+    DeleteComment,
+    CreateCategory,
+    GetPostCategory,
+    GetPostSurveys,
+    GetCommentCnt,
+    PostCommentLike,
+    GetAllCategory,
+    UpdateViews,
+} from "./post.service";
 export const PostContext = createContext();
 
 export const PostContextProvider = ({ children }) => {
@@ -17,6 +30,7 @@ export const PostContextProvider = ({ children }) => {
                 GetCommentCnt, // 댓글의 수를 받는
                 PostCommentLike,
                 GetAllCategory,
+                UpdateViews, // 게시글 조회수 올려주는
             }}
         >
             {children}
