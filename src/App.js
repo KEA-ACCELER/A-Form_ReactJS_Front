@@ -15,6 +15,7 @@ import Mypage_setting from "./pages/Mypage/Mypage_setting";
 import MyTemplatePage from "./pages/Mypage/MyTemplatePage";
 import MyPostedSurveysPage from "./pages/Mypage/MyPostedSurveysPage";
 import MyAnsweredSurveysPage from "./pages/Mypage/MyAnsweredSurveysPage";
+import AllPostList from "./pages/Community/AllPostList";
 
 import "./App.css";
 import "./hover.css";
@@ -60,6 +61,7 @@ function App() {
                 <Route path="register" element={<RegisterForm />} />
                 <Route path="login" element={<LoginForm />} />
                 <Route path="community" element={<Community />} />
+                <Route path="community/allpostlist" element={<AllPostList />} />
                 <Route path="AvsB" element={<CreateAvsB />} />
                 <Route path="mypage_setting" element={<Mypage_setting />} />
                 <Route path="post/:postPk" element={<Post />} />

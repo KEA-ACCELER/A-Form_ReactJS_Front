@@ -29,7 +29,7 @@ export default function MyTemplatePage() {
         <div className="my_template">
           <div className="I_write">나의 설문 템플릿</div>
           <div className="I_write_list">
-            <SurveyList page={currentPage} offset={5} progressStatus="all" content="" sort="desc" />
+            <SurveyList type="template" page={currentPage} offset={5} progressStatus="all" content="" sort="desc" />
           </div>
           <div className="page-button-container">
             {currentPage > 1 ? (
