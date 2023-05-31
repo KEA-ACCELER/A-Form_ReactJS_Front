@@ -7,8 +7,6 @@ export const CategoryList = () => {
     const [categoryList, setCategoryList] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
-    const mock = [1, 2, 3, 4, 5];
-
     const getData = () => {
         GetAllCategory().then((res) => setCategoryList(res));
     };
@@ -19,7 +17,7 @@ export const CategoryList = () => {
     return categoryList == undefined ? null : (
         <>
             {categoryList.map((it) => (
-                <HotCategory category={it.categoryType} />
+                <HotCategory category={it.categoryType} key={it.categoryPk} />
             ))}
         </>
     );
