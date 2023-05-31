@@ -2,23 +2,42 @@ import React from "react";
 import AB from "../../assets/images/AB.png";
 import { useNavigate } from "react-router-dom";
 import "./SurveyListItem.css";
+
 export const SurveyListItem = (props) => {
   const navigate = useNavigate();
+  // console.log(props);
+
+  const handleClick = () => {
+    if (props.type === "answered") {
+      navigate(`/survey/${props.id}`, { state: { id: props.id } });
+    } else if (props.type === "post") {
+      navigate(`/post/${props.id}`);
+      console.log(props);
+    } else {
+      navigate(`/create/`, { state: { id: props.id } });
+    }
+  };
 
   return (
-    <div
-      className="SurveyListItem"
-      onClick={() => {
-        navigate(`/create`, { state: { id: props.id } });
-      }}
-    >
+    <div className="SurveyListItem" onClick={handleClick}>
       <span className="surveyTitle">{props.title}</span>
       <span className="author">작성자 : {props.author}</span>
-      <span className="date">{props.date}</span>
-      <span className={`status ${props.status}`}>{props.status}</span>
+      {props.type === "post" && (
+        <>
+          <span className="postStartDate">
+            <div className="startdate">시작날짜</div>
+            {props.postStartDate[0]}년 {props.postStartDate[1]}월 {props.postStartDate[2]}일 {props.postStartDate[3]}시 {props.postStartDate[4]}분
+          </span>
+          <span className="postDueDate">
+            <div className="duedate">마감날짜</div>
+            {props.postDueDate[0]}년 {props.postDueDate[1]}월 {props.postDueDate[2]}일 {props.postDueDate[3]}시 {props.postDueDate[4]}분
+          </span>
+        </>
+      )}
     </div>
   );
 };
+
 export const HotCategory = (props) => {
   return (
     <div className="SurveyListItem">
@@ -38,8 +57,6 @@ export const HotAvsBSurvey = (props) => {
 
 SurveyListItem.defaultProps = {
   title: "제목",
-  date: "2023. 04. 15",
-  status: "OPEN",
   author: "작성자",
 };
 HotCategory.defaultProps = {
