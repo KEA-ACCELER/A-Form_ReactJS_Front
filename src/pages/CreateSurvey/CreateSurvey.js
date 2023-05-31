@@ -48,6 +48,14 @@ function CreateSurvey() {
         templateLoader();
     };
 
+    // textarea state
+    const textarea1 = useRef();
+    const textarea2 = useRef();
+    const handleResizeHeight = (textarea) => {
+        textarea.current.style.height = 0; //height 초기화
+        textarea.current.style.height = textarea.current.scrollHeight + "px";
+    };
+
     // onTemplate Load
     const templateLoader = () => {
         if (location.state != null) {
@@ -268,21 +276,25 @@ function CreateSurvey() {
                 <div className="text-wrapper">
                     <textarea
                         className="surveyTitle"
+                        ref={textarea1}
                         type="text"
                         value={title}
                         placeholder="Create Form"
                         onChange={(e) => {
                             setTitle(e.target.value);
+                            handleResizeHeight(textarea1);
                         }}
                     />
 
                     <textarea
                         className="surveyDesc"
+                        ref={textarea2}
                         type="text"
                         value={description}
                         placeholder="Form Description"
                         onChange={(e) => {
                             setDescription(e.target.value);
+                            handleResizeHeight(textarea2);
                         }}
                     />
                 </div>
