@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { CreatePost, GetPost, PostComment, GetComments, DeleteComment, CreateCategory, GetPostCategory, GetPostSurveys, GetCommentCnt, PostCommentLike } from "./post.service";
+import { CreatePost, GetPost, PostComment, GetComments, DeleteComment, CreateCategory, GetPostCategory, GetPostSurveys, GetCommentCnt, PostCommentLike, GetAllCategory } from "./post.service";
 export const PostContext = createContext();
 
 export const PostContextProvider = ({ children }) => {
@@ -16,6 +16,7 @@ export const PostContextProvider = ({ children }) => {
                 GetPostSurveys,
                 GetCommentCnt, // 댓글의 수를 받는
                 PostCommentLike,
+                GetAllCategory,
             }}
         >
             {children}
