@@ -7,6 +7,8 @@ import { AuthenticationContext } from "../../services/authentication/authenticat
 import FadeIn from "../../animation/FadeIn";
 import { SurveyList } from "../../components/SurveyList/SurveyList";
 import { SurveyContext } from "../../services/survey/survey.context";
+import { GetPostedSurveys, GetAnsweredSurveysTotal } from "../../services/survey/survey.service";
+import { GetUserData } from "../../services/authentication/authentication.service";
 
 export default function Mypage() {
   const navigate = useNavigate();
@@ -26,6 +28,40 @@ export default function Mypage() {
     CheckLogin();
   }, []);
 
+  // 유저 데이터 가져오기
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await GetUserData(userToken);
+      setUserData(result);
+    };
+    fetchData();
+  }, []);
+
+  //작성 설문수 가져오기
+  const [postedSurveys, setPostedSurveys] = useState(null);
+
+  useEffect(() => {
+    const fetchPostedSurveys = async () => {
+      const result = await GetPostedSurveys(1, 10, userToken); // 여기에서 page와 offset 값을 제공
+      setPostedSurveys(result);
+    };
+
+    fetchPostedSurveys();
+  }, []);
+
+  //답변 설문수 받아오기
+  const [answeredSurveys, setAnsweredSurveys] = useState([]);
+  useEffect(() => {
+    const fetchAnsweredSurveys = async () => {
+      const result = await GetAnsweredSurveysTotal(1, 10, userToken); // 여기에서 page와 offset 값을 제공
+      setAnsweredSurveys(result);
+    };
+
+    fetchAnsweredSurveys();
+  }, [userToken]);
+
   return (
     <FadeIn className="Mypage">
       <div className="main">
@@ -36,7 +72,7 @@ export default function Mypage() {
             </div>
 
             <div className="nameline">
-              <div className="profile_name">Minsik Choi</div>
+              <div className="profile_name">{userData?.name}</div>
               <div className="edit">
                 <button className="edit_button" onClick={handleSettingClick}>
                   <img src={edit_icon} alt="" />
@@ -46,16 +82,16 @@ export default function Mypage() {
 
             <div className="line"></div>
 
-            <div className="profile_email">minsikchoi@gachon.ac.kr</div>
+            <div className="profile_email">{userData?.email}</div>
 
             <div className="profile_post">
               <div className="post">작성 설문수</div>
-              <div className="post_num">21</div>
+              <div className="post_num">{postedSurveys?.total}</div>
             </div>
 
             <div className="profile_response">
               <div className="response">답변 설문수</div>
-              <div className="response_num">45</div>
+              <div className="response_num">{answeredSurveys.total}</div>
             </div>
           </div>
         </div>
