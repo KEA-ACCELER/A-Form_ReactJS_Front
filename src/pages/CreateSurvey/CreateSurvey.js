@@ -17,50 +17,8 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import { AIContext } from "../../services/ai/ai.context";
 
-const mockData = {
-    type: "NORMAL",
-    title: "AI GENERATED FORM",
-    deadline: "2023-05-09T13:10:54.310Z",
-    questions: [
-        {
-            title: "당신은 사람입니까",
-            type: "RADIO",
-            selections: [
-                {
-                    type: "LETTER",
-                    content: "예",
-                },
-                {
-                    type: "LETTER",
-                    content: "아니오",
-                },
-            ],
-            isRequired: false,
-            isRequired: false,
-        },
-        {
-            title: "A-Form을 어떻게 알게 되었습니까",
-            type: "CHECKBOX",
-            selections: [
-                {
-                    type: "LETTER",
-                    content: "TV를 통해서",
-                },
-                {
-                    type: "LETTER",
-                    content: "지인들이 알려줘서",
-                },
-                {
-                    type: "LETTER",
-                    content: "Instagram을 통해서",
-                },
-            ],
-            isRequired: false,
-        },
-    ],
-    description: "string",
-};
 function CreateSurvey() {
     // Navigation
     const navigate = useNavigate();
@@ -68,8 +26,9 @@ function CreateSurvey() {
 
     // Context
     const { userToken, isLogin, userData } = useContext(AuthenticationContext); // User Token, isLogin
-    const { CreateSurvey, AIGenerateSurvey, GetSurveyById } = useContext(SurveyContext); // Survey
+    const { CreateSurvey, GetSurveyById } = useContext(SurveyContext); // Survey
     const { CreatePost, CreateCategory } = useContext(PostContext); // Post
+    const { GetAIGenerate } = useContext(AIContext); // AI
 
     // survey state
     const [title, setTitle] = useState("");
@@ -196,20 +155,28 @@ function CreateSurvey() {
         setConfirmModalShow(false);
         setLinkModalShow(true);
     };
-    // ai state //
+
+    // AI //
     const [aiIsLoading, setAiIsLoading] = useState(false);
     const AIGenerateHandler = () => {
         if (!saveIsLoading) {
             setAiIsLoading(true);
-            setTimeout(() => {
-                const msg = "축구와 관련된 내용을 json으로 만들어줘";
-                console.log(AIGenerateSurvey(msg, userToken));
-                setTitle(mockData.title);
-                setQuestions(mockData.questions);
-                setAiIsLoading(false);
-            }, 3000);
+            const msg = title;
+            console.log(
+                GetAIGenerate(msg).then((res) => {
+                    const data = res.split("```");
+                    console.log(data);
+                    const dataJSON = JSON.parse(data[1]);
+                    console.log(dataJSON);
+                    setTitle(dataJSON.title);
+                    setQuestions(dataJSON.questions);
+                    setDescription(dataJSON.description);
+                    setAiIsLoading(false);
+                })
+            );
         }
     };
+
     /* Modal */
     // Modal state
     const [linkModalShow, setLinkModalShow] = useState(false);
@@ -305,7 +272,7 @@ function CreateSurvey() {
                         }}
                     />
 
-                    <input
+                    <textarea
                         className="surveyDesc"
                         type="text"
                         value={description}
