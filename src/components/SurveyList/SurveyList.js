@@ -5,11 +5,11 @@ import { SurveyListItem } from "./SurveyListItem";
 import { SurveyContext } from "../../services/survey/survey.context";
 import { AuthenticationContext } from "../../services/authentication/authentication.context";
 import { PostContext } from "../../services/post/post.context";
+import { GetPostedSurveys } from "../../services/survey/survey.service";
 
 export const SurveyList = ({ type, page, offset, status, sort }) => {
   const [formData, setFormData] = useState();
   const [showList, setShowList] = useState(false);
-  const { GetSurveyData } = useContext(SurveyContext);
   const { GetAnsweredSurveys } = useContext(SurveyContext);
   const { GetPostSurveys } = useContext(PostContext);
   const { userData, userToken } = useContext(AuthenticationContext);
@@ -29,10 +29,10 @@ export const SurveyList = ({ type, page, offset, status, sort }) => {
       console.log("answered");
       setFormData(result);
     } else {
-      result = await GetSurveyData(page, offset, status, sort);
+      result = await GetPostedSurveys(page, offset, userToken);
       console.log(result);
-      console.log("other");
-      setFormData(result.data.data);
+      console.log("template");
+      setFormData(result.data);
     }
   };
 

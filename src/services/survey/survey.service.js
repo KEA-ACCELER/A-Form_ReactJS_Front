@@ -117,7 +117,7 @@ export const GetAnsweredSurveysTotal = async (page, offset, userToken) => {
 };
 
 export const GetPostedSurveys = async (page, offset, userToken) => {
-  //작성 설문수
+  //작성 설문수와 나의 설문 템플릿을 받아온다
   //   console.log(page, offset, userToken);
   const options = { headers: { accept: "application/json", "Content-Type": "application/json", Authorization: `Bearer ${userToken}` } };
 
