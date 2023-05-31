@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Route, Routes } from "react-router-dom";
 import "./Mypage.css";
 import profileimg from "../../assets/images/profile_sample1.png";
 import edit_icon from "../../assets/images/edit_icon 1.png";
@@ -9,9 +9,18 @@ import { SurveyList } from "../../components/SurveyList/SurveyList";
 import { SurveyContext } from "../../services/survey/survey.context";
 import { GetPostedSurveys, GetAnsweredSurveysTotal } from "../../services/survey/survey.service";
 import { GetUserData } from "../../services/authentication/authentication.service";
+import MyTemplatePage from "./MyTemplatePage";
+import MyPostedSurveysPage from "./MyPostedSurveysPage";
+import MyAnsweredSurveysPage from "./MyAnsweredSurveysPage";
 
 export default function Mypage() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    //디폴트 값을 나의 설문 템플릿으로 설정
+    navigate("/mypage/template");
+  }, []);
+
   const handleSettingClick = () => {
     navigate("/mypage_setting");
   };
@@ -97,7 +106,7 @@ export default function Mypage() {
         </div>
 
         <div className="Mypage_survey">
-          <div className="my_template">
+          {/* <div className="my_template">
             <div className="I_write">나의 설문 템플릿</div>
             <div className="I_write_list">
               <SurveyList page={1} offset={10} progressStatus="all" content="" sort="desc" />
@@ -116,7 +125,25 @@ export default function Mypage() {
             <div className="I_writing_list">
               <SurveyList type="answered" page={0} offset={10} progressStatus="all" content="" sort="desc" />
             </div>
-          </div>
+          </div> */}
+
+          <nav style={{ marginBottom: "20px" }}>
+            <button className="mypage_selection_button" onClick={() => navigate("template")}>
+              나의 설문 템플릿
+            </button>
+            <button className="mypage_selection_button" onClick={() => navigate("posted")}>
+              내가 올린 설문
+            </button>
+            <button className="mypage_selection_button" onClick={() => navigate("answered")}>
+              내가 응답한 설문
+            </button>
+          </nav>
+
+          <Routes>
+            <Route path="template" element={<MyTemplatePage />} />
+            <Route path="posted" element={<MyPostedSurveysPage />} />
+            <Route path="answered" element={<MyAnsweredSurveysPage />} />
+          </Routes>
         </div>
       </div>
     </FadeIn>

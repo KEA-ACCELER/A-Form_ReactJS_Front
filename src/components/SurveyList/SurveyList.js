@@ -44,7 +44,7 @@ export const SurveyList = ({ type, page, offset, status, sort }) => {
 
   useEffect(() => {
     if (userData != undefined) getFormData();
-  }, [userData]);
+  }, [userData, page]);
 
   return (
     <div className="SurveyList">
