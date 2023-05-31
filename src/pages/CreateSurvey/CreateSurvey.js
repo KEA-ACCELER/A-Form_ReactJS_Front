@@ -18,6 +18,8 @@ import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { AIContext } from "../../services/ai/ai.context";
+import { AIGenerateModal } from "../../components/Modal/AIGenerateModal";
+import { Firework } from "../../animation/Firework";
 
 function CreateSurvey() {
     // Navigation
@@ -158,12 +160,11 @@ function CreateSurvey() {
 
     // AI //
     const [aiIsLoading, setAiIsLoading] = useState(false);
-    const AIGenerateHandler = () => {
+    const AIGenerateHandler = (title) => {
         if (!saveIsLoading) {
             setAiIsLoading(true);
-            const msg = title;
             console.log(
-                GetAIGenerate(msg).then((res) => {
+                GetAIGenerate(title).then((res) => {
                     const data = res.split("```");
                     console.log(data);
                     const dataJSON = JSON.parse(data[1]);
@@ -172,6 +173,8 @@ function CreateSurvey() {
                     setQuestions(dataJSON.questions);
                     setDescription(dataJSON.description);
                     setAiIsLoading(false);
+                    setAIModalShow(false);
+                    Firework();
                 })
             );
         }
@@ -181,6 +184,7 @@ function CreateSurvey() {
     // Modal state
     const [linkModalShow, setLinkModalShow] = useState(false);
     const [confirmModalShow, setConfirmModalShow] = useState(false);
+    const [AIModalShow, setAIModalShow] = useState(true);
 
     // Modal Function
     const handleClose = () => {
@@ -239,7 +243,7 @@ function CreateSurvey() {
             <div className="ButtonWrapper">
                 <AddingOption addQuestion={addQuestion}></AddingOption>
                 <div className="SurveyBtnWrapper">
-                    <Button variant={aiIsLoading ? "primary" : "outline-primary"} disabled={aiIsLoading} onClick={aiIsLoading ? null : AIGenerateHandler}>
+                    <Button variant={aiIsLoading ? "primary" : "outline-primary"} disabled={aiIsLoading} onClick={aiIsLoading ? null : () => setAIModalShow(true)}>
                         {aiIsLoading ? <Spinner className="icon" as="span" animation="grow" size="sm" role="status" aria-hidden="true" /> : <SiProbot className="icon-svg" />}
                         AI Generate
                     </Button>
@@ -260,9 +264,9 @@ function CreateSurvey() {
             <FadeIn className="surveyWrapper" childClassName="childClassName">
                 <ConfirmSurveyModal modalShow={confirmModalShow} handleModalClose={handleConfirmModalClose} onSubmit={createPostHandler} />
                 <LinkModal modalShow={linkModalShow} handleModalClose={handleClose} postPk={postPk} />
-
+                <AIGenerateModal show={AIModalShow} setShow={setAIModalShow} aiIsLoading={aiIsLoading} AIGenerateHandler={AIGenerateHandler} />
                 <div className="text-wrapper">
-                    <input
+                    <textarea
                         className="surveyTitle"
                         type="text"
                         value={title}
