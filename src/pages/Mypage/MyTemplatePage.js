@@ -38,7 +38,7 @@ export default function MyTemplatePage() {
                   Previous Page
                 </button>
               ) : (
-                <button className="page-button invisible">Previous Page</button> /* 페이지가 1일 때는 버튼을 숨깁 */
+                <button className="page-button invisible">Previous Page</button> /* 페이지가 1일 때는 버튼을 숨김 */
               )}
               <span className="page-number">{currentPage}</span>
               <button className="page-button" onClick={() => setCurrentPage((old) => old + 1)}>
