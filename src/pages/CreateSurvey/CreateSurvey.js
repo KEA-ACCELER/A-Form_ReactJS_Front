@@ -116,11 +116,11 @@ function CreateSurvey() {
             if (q.title == "") {
                 checkQTitle = false;
             }
-            if (q.selections.length === 0) {
+            if (q.type !== "SHORTFORM" && q.selections.length === 0) {
                 checkQSelections = false;
             }
             q.selections.forEach((selection) => {
-                if ((q.type == "RADIO" || "CHECKBOX") && selection.content == "") {
+                if ((q.type === "RADIO" || q.type === "CHECKBOX") && selection.content == "") {
                     checkQContent = false;
                 }
             });
@@ -173,8 +173,12 @@ function CreateSurvey() {
             setAiIsLoading(true);
             console.log(
                 GetAIGenerate(title).then((res) => {
-                    const data = res.split("```");
+                    let data = res.split("```");
                     console.log(data);
+                    if (data[1].indexOf("json")) {
+                        data[1] = data[1].replace("json", "");
+                        console.log(data[1]);
+                    }
                     const dataJSON = JSON.parse(data[1]);
                     console.log(dataJSON);
                     setTitle(dataJSON.title);
