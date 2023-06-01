@@ -154,6 +154,7 @@ function CreateSurvey() {
             }, 3000);
         }
     };
+
     // Submit
     const handleSubmit = async () => {
         const type = "NORMAL";
@@ -161,6 +162,7 @@ function CreateSurvey() {
         let newId = await CreateSurvey(type, title, description, questions, userToken);
         setSurveyId(newId);
     };
+
     // Create Post
     const createPostHandler = async (startDate, endDate, category) => {
         await CreatePost(title, description, surveyId, startDate, endDate, userData.userPk)

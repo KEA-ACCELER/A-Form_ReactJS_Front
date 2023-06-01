@@ -116,23 +116,50 @@ export const GetPostedSurveys = async (page, offset, userToken) => {
 };
 
 export const GetPopularSurveys = async (date) => {
-  // 커뮤니티 Hot 설문에서 사용됨
-  const options = {
-    headers: {
-      accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  };
+    // 커뮤니티 Hot 설문에서 사용됨
+    const options = {
+        headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+        },
+    };
 
-  const formattedDate = new Date(date).toISOString();
+    const formattedDate = new Date(date).toISOString();
 
-  const result = await axios
-    .get(`${SURVEY_API_URL}/api/surveys/popular?date=${formattedDate}`, options)
-    .then((res) => {
-      console.log("getPopular", res);
-      return res.data;
+    const result = await axios
+        .get(`${SURVEY_API_URL}/api/surveys/popular?date=${formattedDate}`, options)
+        .then((res) => {
+            console.log("getPopular", res);
+            return res.data;
+        })
+        .catch((err) => console.log(err));
+
+    return result;
+};
+/* AvsB */
+
+export const CreateAvsBSurvey = async (formData) => {
+    await axios({
+        method: "post",
+        url: `${SURVEY_API_URL}/api/surveys`,
+        data: formData,
+        headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}` },
     })
-    .catch((err) => console.log(err));
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+};
 
-  return result;
+/* Files */
+
+export const PostFiles = async (formData) => {
+    console.log("formdata : ", formData);
+    const res = await axios
+        .post(`${SURVEY_API_URL}/api/surveys/files`, formData)
+        .then((res) => {
+            console.log("fileUpload : ", res);
+            return res.data;
+        })
+        .catch((err) => console.log("fileUpload err : ", err));
+
+    return res;
 };
