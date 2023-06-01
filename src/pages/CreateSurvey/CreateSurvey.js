@@ -40,6 +40,11 @@ function CreateSurvey() {
     const [postPk, setPostPk] = useState("");
     const nextCardId = useRef(0); // surveyCard 아이디
 
+    // Modal state
+    const [linkModalShow, setLinkModalShow] = useState(false);
+    const [confirmModalShow, setConfirmModalShow] = useState(false);
+    const [AIModalShow, setAIModalShow] = useState(true);
+
     const CheckLogin = () => {
         if (!localStorage.getItem("isLoggedIn")) {
             alert("로그인이 필요한 서비스 입니다.");
@@ -59,6 +64,7 @@ function CreateSurvey() {
     // onTemplate Load
     const templateLoader = () => {
         if (location.state != null) {
+            setAIModalShow(false);
             setSurveyId(location.state.id);
             GetSurveyById(location.state.id).then((res) => {
                 setTitle(res.data.title);
@@ -157,13 +163,14 @@ function CreateSurvey() {
     };
     // Create Post
     const createPostHandler = async (startDate, endDate, category) => {
-        await CreatePost(title, description, surveyId, startDate, endDate, userData.userPk).then((res) => {
-            setPostPk(res.postPk);
-            CreateCategory(category, res.postPk);
-        });
-
-        setConfirmModalShow(false);
-        setLinkModalShow(true);
+        await CreatePost(title, description, surveyId, startDate, endDate, userData.userPk)
+            .then((res) => {
+                setPostPk(res.postPk);
+                CreateCategory(category, res.postPk);
+                setConfirmModalShow(false);
+                setLinkModalShow(true);
+            })
+            .catch((err) => console.log(err));
     };
 
     // AI //
@@ -193,10 +200,6 @@ function CreateSurvey() {
     };
 
     /* Modal */
-    // Modal state
-    const [linkModalShow, setLinkModalShow] = useState(false);
-    const [confirmModalShow, setConfirmModalShow] = useState(false);
-    const [AIModalShow, setAIModalShow] = useState(true);
 
     // Modal Function
     const handleClose = () => {
