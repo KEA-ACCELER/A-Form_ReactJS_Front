@@ -13,10 +13,7 @@ import {
   GetAllCategory,
   UpdateViews,
   GetAllPostSurveys,
-<<<<<<< HEAD
   GetUserPostsCnt,
-=======
->>>>>>> upstream/main
 } from "./post.service";
 export const PostContext = createContext();
 
