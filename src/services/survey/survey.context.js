@@ -5,10 +5,11 @@ import {
   GetSurveyData,
   GetSurveyById,
   PostSurveyAnswer,
-  AIGenerateSurvey,
   DeleteSurvey,
   GetAnsweredSurveys,
   GetPostedSurveys,
+  CreateAvsBSurvey,
+  PostFiles,
   GetPopularSurveys,
   GetStats,
 } from "./survey.service";
@@ -27,6 +28,8 @@ export const SurveyContextProvider = ({ children }) => {
         GetAnsweredSurveys, //응답한 survey를 요청하는 함수
         GetPostedSurveys, // 템플릿 받아오는 함수
         GetPopularSurveys, //인기설문 받아오는 함수
+        CreateAvsBSurvey,
+        PostFiles,
         GetStats, // 통계 받아오는 함수
       }}
     >

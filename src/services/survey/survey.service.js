@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const SURVEY_API_URL = process.env.REACT_APP_SURVEY_API_URL;
-const AI_API_URL = process.env.REACT_APP_AI_API_URL;
 
 export const CreateSurvey = (type, title, description, questions, userToken) => {
   // send newSurvey to database
@@ -21,13 +20,14 @@ export const CreateSurvey = (type, title, description, questions, userToken) => 
   const formId = axios
     .post(`${SURVEY_API_URL}/api/surveys`, newSurvey, options)
     .then((response) => {
-      console.log(response.data);
+      console.log("create survey res", response);
       return response.data;
     })
     .catch((err) => {
       console.log(err);
+      return err;
     });
-  console.log(formId);
+  console.log("survey id : ", formId);
   return formId;
 };
 
@@ -135,6 +135,33 @@ export const GetPopularSurveys = async (date) => {
     .catch((err) => console.log(err));
 
   return result;
+};
+/* AvsB */
+
+export const CreateAvsBSurvey = async (formData) => {
+  await axios({
+    method: "post",
+    url: `${SURVEY_API_URL}/api/surveys`,
+    data: formData,
+    headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}` },
+  })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
+
+/* Files */
+
+export const PostFiles = async (formData) => {
+  console.log("formdata : ", formData);
+  const res = await axios
+    .post(`${SURVEY_API_URL}/api/surveys/files`, formData)
+    .then((res) => {
+      console.log("fileUpload : ", res);
+      return res.data;
+    })
+    .catch((err) => console.log("fileUpload err : ", err));
+
+  return res;
 };
 
 export const GetStats = async (id) => {
