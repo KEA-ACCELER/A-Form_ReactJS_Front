@@ -13,7 +13,7 @@ export const Community = () => {
     navigate("/community/allpostlist");
   };
 
-  const handleHotMoreClick = () => {
+  const handleMoreClick = () => {
     navigate("/allhotlist");
   };
 
