@@ -136,3 +136,22 @@ export const GetPopularSurveys = async (date) => {
 
   return result;
 };
+
+export const GetStats = async (id) => {
+  // 통계 받아오기
+  const options = {
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  const result = await axios
+    .get(`${SURVEY_API_URL}/api/surveys/${id}/statistics`, options)
+    .then((res) => {
+      console.log("getStats", res);
+      return res.data;
+    })
+    .catch((err) => console.log(err));
+
+  return result;
+};

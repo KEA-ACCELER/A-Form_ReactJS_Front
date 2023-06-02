@@ -10,6 +10,7 @@ import {
   GetAnsweredSurveys,
   GetPostedSurveys,
   GetPopularSurveys,
+  GetStats,
 } from "./survey.service";
 
 export const SurveyContext = createContext();
@@ -26,6 +27,7 @@ export const SurveyContextProvider = ({ children }) => {
         GetAnsweredSurveys, //응답한 survey를 요청하는 함수
         GetPostedSurveys, // 템플릿 받아오는 함수
         GetPopularSurveys, //인기설문 받아오는 함수
+        GetStats, // 통계 받아오는 함수
       }}
     >
       {children}
