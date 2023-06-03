@@ -1,9 +1,9 @@
 import React from "react";
 
-export const StatListItem = ({ item }) => {
+export const StatListItem = ({ item, questionNumber }) => {
   return (
     <div className="StatListItem">
-      <h3>{`Question ${parseInt(item.index) + 1}`}</h3>
+      <h3>{`Question ${questionNumber}`}</h3>
       <ul>
         {item.values.map((value) => (
           <li key={value.answer}>
