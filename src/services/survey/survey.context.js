@@ -12,6 +12,7 @@ import {
   PostFiles,
   // GetPopularSurveys,
   GetStats,
+  GetMyAnswer,
 } from "./survey.service";
 
 export const SurveyContext = createContext();
@@ -31,6 +32,7 @@ export const SurveyContextProvider = ({ children }) => {
         CreateAvsBSurvey,
         PostFiles,
         GetStats, // 통계 받아오는 함수
+        GetMyAnswer, // 내가 답한것 가져오는 함수
       }}
     >
       {children}
