@@ -39,34 +39,6 @@ export default function Survey() {
     getSurveyData();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchSurveyData = async () => {
-  //     let data = await GetSurveyById(id);
-  //     setSurveyData(data.data);
-  //     console.log(data.data);
-
-  //     let myAnswer = await GetMyAnswer(id, userToken);
-  //     console.log("My Answer: ", myAnswer);
-
-  //     if (myAnswer === null) {
-  //       console.error("Failed to get my answer.");
-  //       return;
-  //     }
-
-  //     let answerForm = {
-  //       survey: data._id,
-  //       answers: myAnswer.answers,
-  //     };
-
-  //     console.log("Answer form: ", answerForm);
-
-  //     setSurveyAnswer(answerForm);
-  //     setLoaded(true);
-  //   };
-
-  //   fetchSurveyData();
-  // }, []);
-
   //Set AnswerForm
   const setAnswerForm = (data) => {
     let answerForm = {

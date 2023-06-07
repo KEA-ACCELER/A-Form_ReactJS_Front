@@ -9,6 +9,7 @@ export const StatListItem = ({ stats, index, questionNumber, surveyId, questionT
   useEffect(() => {
     console.log("4444 selections : ", selections);
     console.log("4444 stats: ", stats);
+    console.log("surveyData: ", surveyData);
     if (surveyData.questions[index].type === "SHORTFORM") {
       return;
     } else {

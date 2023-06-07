@@ -39,11 +39,16 @@ export const SurveyList = ({ type, page, offset, status, sort, date }) => {
       console.log(result);
       console.log("template");
       setFormData(result.data);
-    } else if (type === "allpost") {
-      // 모든 포스트
-      result = await GetAllPostSurveys(offset, page);
-      console.log(result);
-      console.log("allpost");
+    } else if (type === "allpost" || type === "popular") {
+      // 모든 포스트 또는 인기설문
+      let result;
+      if (type === "allpost") {
+        result = await GetAllPostSurveys(offset, page);
+      } else if (type === "popular") {
+        result = await GetPopularPost();
+      }
+
+      console.log("result: ", result);
       const modifiedData = await Promise.all(
         result.map(async (post) => {
           const postData = await GetPost(post.postPk);
@@ -62,13 +67,6 @@ export const SurveyList = ({ type, page, offset, status, sort, date }) => {
       ).catch((err) => console.log(err));
 
       setFormData(modifiedData);
-      // setFormData(result);
-    } else if (type === "popular") {
-      // 인기설문
-      result = await GetPopularPost();
-      console.log("result: ", result);
-      console.log("popular");
-      setFormData(result);
     } else {
       result = await GetSurveyData(page, offset, userToken);
       console.log(result);
@@ -92,7 +90,7 @@ export const SurveyList = ({ type, page, offset, status, sort, date }) => {
       {showList ? (
         <>
           {formData.map((it) =>
-            type === "post" || type === "allpost" ? (
+            type === "post" || type === "allpost" || type === "popular" ? (
               <SurveyListItem
                 key={it.postPk}
                 title={it.postTitle}
@@ -103,7 +101,7 @@ export const SurveyList = ({ type, page, offset, status, sort, date }) => {
                 postStartDate={it.postStartDate}
                 postDueDate={it.postDueDate}
               />
-            ) : type === "answered" || type === "popular" ? (
+            ) : type === "answered" ? (
               <SurveyListItem key={it._id} title={it.title} id={it._id} surveyType={it.type} author={it.author} type={type} />
             ) : (
               <SurveyListItem key={it._id} title={it.title} id={it._id} surveyType={it.type} author={it.author} type={type} />

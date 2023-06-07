@@ -116,6 +116,23 @@ export const GetAllPostSurveys = async (itemNum, pageIndex) => {
   return result;
 };
 
+export const GetPopularPost = async () => {
+  // 인기 설문
+  const options = { headers: { accept: "application/json", "Content-Type": "application/json" } };
+  const result = await axios
+    .get(`${POST_API_URL}/api/post/getPopularPost`, options)
+    .then((res) => {
+      console.log("get popular", res);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return [];
+    });
+
+  return result;
+};
+
 export const GetUserPostsCnt = async (userPk) => {
   // 한 유저가 올린 포스트 수
   const options = { headers: { accept: "application/json", "Content-Type": "application/json" } };
@@ -206,21 +223,4 @@ export const PostCommentLike = async (userPk, commentPk) => {
     .post(`${POST_API_URL}/api/post/commentLike/likeButtonClicked`, body)
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
-};
-
-export const GetPopularPost = async () => {
-  // 인기 설문
-  const options = { headers: { accept: "application/json", "Content-Type": "application/json" } };
-  const result = await axios
-    .get(`${POST_API_URL}/api/post/getPopularPost`, options)
-    .then((res) => {
-      console.log("get popular", res);
-      return res.data;
-    })
-    .catch((err) => {
-      console.log(err);
-      return [];
-    });
-
-  return result;
 };
