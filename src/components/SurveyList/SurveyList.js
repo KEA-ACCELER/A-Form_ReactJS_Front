@@ -12,7 +12,7 @@ export const SurveyList = ({ type, page, offset, status, sort, date }) => {
   const [showList, setShowList] = useState(false);
   const { GetAnsweredSurveys } = useContext(SurveyContext);
   const { GetPostSurveys } = useContext(PostContext);
-  const { userData, userToken } = useContext(AuthenticationContext);
+  const { userData, userToken, initilaizeUserData } = useContext(AuthenticationContext);
   const { GetAllPostSurveys, GetPost } = useContext(PostContext);
   const { GetPostedSurveys, GetSurveyById } = useContext(SurveyContext);
   const { GetPopularPost } = useContext(PostContext);
@@ -22,7 +22,7 @@ export const SurveyList = ({ type, page, offset, status, sort, date }) => {
     let result;
     if (type === "post") {
       //내가 올린 설문
-      console.log(userData);
+      if (userData === undefined) await initilaizeUserData();
       result = await GetPostSurveys(userData.userPk, offset, page);
       console.log(result);
       console.log("post");
@@ -82,7 +82,7 @@ export const SurveyList = ({ type, page, offset, status, sort, date }) => {
   }, [formData]);
 
   useEffect(() => {
-    if (userData != undefined) getFormData();
+    getFormData();
   }, [userData, page]);
 
   return (
@@ -95,9 +95,9 @@ export const SurveyList = ({ type, page, offset, status, sort, date }) => {
                 key={it.postPk}
                 title={it.postTitle}
                 id={it.postPk}
-                author={it.postAuthor}
+                author={it.postAuthorId}
                 type={type}
-                surveyType={it.type}
+                surveyType={it.postSurveyType}
                 postStartDate={it.postStartDate}
                 postDueDate={it.postDueDate}
               />
